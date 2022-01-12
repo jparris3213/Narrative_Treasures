@@ -1,4 +1,5 @@
-// require
+const Profile = require("./Profile");
+const Item = require("./Item");
 
 // export
-module.exports = {};
+module.exports = { Profile, Item };
