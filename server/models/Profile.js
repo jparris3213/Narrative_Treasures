@@ -23,6 +23,7 @@ const profileSchema = new Schema({
     type: String,
     required: false,
     unique: false,
+    defualt: "shopper",
   },
   inventory: [
     {
