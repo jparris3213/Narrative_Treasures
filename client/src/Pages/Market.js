@@ -1,7 +1,8 @@
 import React from 'react';
 
 const Market = () => {
-    <div>
+    return(
+        <div>
         <div>
             <h1> Welcome to the Marketplace </h1>
         </div>
@@ -12,6 +13,7 @@ const Market = () => {
             </ul>
         </div>
     </div>
+    )
 };
 
 export default Market;
