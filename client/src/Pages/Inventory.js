@@ -3,6 +3,7 @@ import React from 'react';
 
 
 const Inventory = () => {
+    return(
     <div>
         <div>
             <h1>Inventory </h1>
@@ -18,6 +19,7 @@ const Inventory = () => {
             </ul>
         </div>
     </div>
+    )
 };
 
 export default Inventory;
