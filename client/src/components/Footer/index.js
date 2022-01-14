@@ -1,7 +1,14 @@
 import React from "react";
 
 function Footer() {
-  return <div>Contact</div>;
+  return (
+    <footer id="contact" className="contact">
+      <ul>
+        <li>Email</li>
+        <li>Github</li>
+      </ul>
+    </footer>
+  );
 }
 
 export default Footer;

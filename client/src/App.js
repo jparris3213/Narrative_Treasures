@@ -7,14 +7,19 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // importing components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-// import Pages from "./components/Pages";
 
+// Pages Import
+import Market from "./Pages/Market";
+import Inventory from "./Pages/Inventory";
+import Home from "./Pages/Home";
+import UserProfile from "./Pages/UserProfile";
 // importing pages
+//  import all pages individually
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -45,7 +50,23 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header></Header>
-        <Pages></Pages>
+          <div className="flex-column justify-center align-center min-100-vh bg-primary">
+            <Switch>
+              <Router exact path="/">
+                <Home />
+              </Router>
+              <Route exact path="/marketplace">
+                <Market />
+              </Route>
+              <Route exact path="/inventory">
+                <Inventory />
+              </Route>
+              <Route exact path="/user/">
+                <UserProfile />
+              </Route>
+            </Switch>
+          
+          </div>
         <Footer></Footer>
       </Router>
     </ApolloProvider>
