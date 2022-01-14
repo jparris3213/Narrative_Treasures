@@ -19,6 +19,11 @@ const typeDefs = gql`
     description: String
   }
 
+  type Auth {
+    token: ID!
+    profile: Profile
+  }
+
   type Query {
     profiles: [Profile]!
     profile(profileId: ID!): Profile
@@ -31,7 +36,7 @@ const typeDefs = gql`
     addProfile(
       name: String!
       email: String!
-      password: string!
+      password: String!
       role: String!
       gold: Int!
     ): Auth
