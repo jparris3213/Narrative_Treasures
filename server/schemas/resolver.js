@@ -25,7 +25,41 @@ const resolver = {
     },
   },
 
-  Mutation: {},
+  Mutation: {
+    addProfile: async (parent, { name, email, password, role, gold }) => {
+      const profile = await Profile.create(name, email, password, role, gold);
+      const token = signToken(profile);
+
+      return { token, profile };
+    },
+    login: async (parent, { name, email, password }) => {
+      const profile = await Profile.findOne({ name, email });
+
+      if (!profile) {
+        throw new AuthenticationError("No profile with that name or email!");
+      }
+      const correctPw = await profile.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect Password!");
+      }
+      const token = signToken(profile);
+      return { token, profile };
+    },
+
+    changeGold: async (parent, { profileId, goldSet }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: profileId },
+          { $set: { gold: goldSet } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+    },
+  },
 };
 
 module.exports = resolver;
