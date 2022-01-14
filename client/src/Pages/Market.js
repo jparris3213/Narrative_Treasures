@@ -1,11 +1,17 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
 
 const Market = () => {
-    
+    <div>
+        <div>
+            <h1> Welcome to the Marketplace </h1>
+        </div>
+        <div>
+            <ul>
+                <li>Item One</li>
+                <li>Item Two</li>
+            </ul>
+        </div>
+    </div>
+};
 
-
-    return (
-        
-    )
-}
+export default Market;
