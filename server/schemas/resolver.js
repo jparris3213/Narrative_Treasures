@@ -58,6 +58,25 @@ const resolver = {
           }
         );
       }
+      throw new AuthenticationError(
+        "You have to be logged in to make changes!"
+      );
+    },
+
+    addInventory: async (parent, { profileId, item }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: profileId },
+          { $addToSet: { inventory: item } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError(
+        "You have to be logged in to make changes!"
+      );
     },
   },
 };
