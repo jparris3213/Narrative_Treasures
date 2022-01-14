@@ -12,13 +12,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // importing components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-// import Pages from "./components/Pages";
 
 // Pages Import
 import Market from "./Pages/Market";
 import Inventory from "./Pages/Inventory";
 import Home from "./Pages/Home";
 import UserProfile from "./Pages/UserProfile";
+// importing pages
+//  import all pages individually
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
