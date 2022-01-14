@@ -48,27 +48,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Header></Header>
-          <div className="flex-column justify-center align-center min-100-vh bg-primary">
-            <Switch>
-              <Router exact path="/">
-                <Home />
-              </Router>
-              <Route exact path="/marketplace">
-                <Market />
-              </Route>
-              <Route exact path="/inventory">
-                <Inventory />
-              </Route>
-              <Route exact path="/user/">
-                <UserProfile />
-              </Route>
-            </Switch>
-          
-          </div>
-        <Footer></Footer>
-      </Router>
+      <div className="flex-column justify-flext-start min-100-vh">
+        <Header />
+      </div>
     </ApolloProvider>
   );
 }
