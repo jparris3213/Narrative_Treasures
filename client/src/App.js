@@ -12,9 +12,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // importing components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-// import Pages from "./components/Pages";
 
 // importing pages
+//  import all pages individually
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({

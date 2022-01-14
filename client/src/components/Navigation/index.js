@@ -5,8 +5,10 @@ function Navigation() {
     <nav>
       <ul>
         <li>Inventory</li>
-        <li>Buy/Sell</li>
+        <li>Market</li>
+        <li>User</li>
         <li>Create Shop</li>
+        <li>Contact</li>
       </ul>
     </nav>
   );
