@@ -37,7 +37,7 @@ const typeDefs = gql`
     ): Auth
     login(name: String!, email: String!, password: String!): Auth
 
-    changeGold(profileId: ID!, gold: Int!): Profile
+    changeGold(profileId: ID!, goldSet: Int!): Profile
     addInventory(profileId: ID!, inventory: String!): Profile
     changeRole(profileId: ID!, role: String!): Profile
 
