@@ -1,10 +1,10 @@
 import React from "react";
-import Navigation from "../Navigation";
+// import Navigation from "../Navigation";
 
 function Header() {
   return (
     <div>
-      <Navigation></Navigation>
+      <Header></Header>
     </div>
   );
 }

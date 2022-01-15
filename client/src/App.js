@@ -7,11 +7,12 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // importing components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Navigation from "./components/Navigation";
 
 // Pages Import
 import Market from "./Pages/Market";
@@ -45,24 +46,46 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function App() {
+function App1() {
   return (
     <ApolloProvider client={client}>
+      <Router>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/profile" element={<UserProfile />} />
+          <Route exact path="/market" element={<Market />} />
+          <Route exact path="/inventory" element={<Inventory />} />
 
-          <Router>
-            <Header />
-              <Routes>
-                <Route exact path="/" element={<Home/>}/>
-                <Route exact path="/profile" element={<UserProfile/>}/>
-                <Route exact path="/market" element={<Market/>}/>
-                <Route exact path="/inventory" element={<Inventory/>}/>
-
-                <Route path="*" element={<Home/>}/>
-              </Routes>
-              <Footer />
-    </Router>
+          <Route path="*" element={<Home />} />
+        </Routes>
+        <Footer />
+      </Router>
     </ApolloProvider>
   );
 }
 
-export default App;
+function App2() {
+  return (
+    <>
+      <Navbar />
+      <div className="container mt-2" style={{ marginTop: 40 }}>
+        <Home />
+        <Account />
+        <Inventory />
+        <Market />
+      </div>
+    </>
+  );
+}
+
+function AllApp() {
+  return (
+    <div>
+      <App1 />
+      <App2 />
+    </div>
+  );
+}
+
+export default AllApp;
