@@ -26,8 +26,17 @@ const resolver = {
   },
 
   Mutation: {
-    addProfile: async (parent, { name, email, password, role, gold }) => {
-      const profile = await Profile.create(name, email, password, role, gold);
+    addProfile: async (
+      parent,
+      { name, email, password, dungeonMaster, gold }
+    ) => {
+      const profile = await Profile.create({
+        name,
+        email,
+        password,
+        dungeonMaster,
+        gold,
+      });
       const token = signToken(profile);
 
       return { token, profile };
@@ -77,6 +86,46 @@ const resolver = {
       throw new AuthenticationError(
         "You have to be logged in to make changes!"
       );
+    },
+
+    changeRole: async (parent, { profileId, setRole }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: profileId },
+          { $set: { dungeonMaster: setRole } },
+          { new: true, runValidators: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    removeProfile: async (parent, args, context) => {
+      if (context.user) {
+        return Profile.findOneAndDelete({ _id: context.user._id });
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    removeItem: async (parent, { item }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: context.user.id },
+          { $pull: { inventory: item } },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("You must be logged in!");
+    },
+
+    addItem: async (
+      parent,
+      { name, cost, equipmentType, description },
+      context
+    ) => {
+      if (context.user) {
+        return Item.create({ name, cost, equipmentType, description });
+      }
+      throw new AuthenticationError("You must be logged in!");
     },
   },
 };

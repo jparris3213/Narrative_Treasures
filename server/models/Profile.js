@@ -19,11 +19,11 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  role: {
-    type: String,
+  dungeonMaster: {
+    type: Boolean,
     required: false,
     unique: false,
-    defualt: "shopper",
+    defualt: false,
   },
   inventory: [
     {
