@@ -116,6 +116,17 @@ const resolver = {
       }
       throw new AuthenticationError("You must be logged in!");
     },
+
+    addItem: async (
+      parent,
+      { name, cost, equipmentType, description },
+      context
+    ) => {
+      if (context.user) {
+        return Item.create({ name, cost, equipmentType, description });
+      }
+      throw new AuthenticationError("You must be logged in!");
+    },
   },
 };
 

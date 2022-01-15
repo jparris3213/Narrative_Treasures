@@ -40,6 +40,7 @@ const typeDefs = gql`
       dungeonMaster: Boolean!
       gold: Int!
     ): Auth
+
     login(name: String!, email: String!, password: String!): Auth
 
     changeGold(profileId: ID!, goldSet: Int!): Profile
@@ -56,7 +57,6 @@ const typeDefs = gql`
       equipmentType: String!
       description: String!
     ): Item
-    removeItem(item: String): Item
   }
 `;
 
