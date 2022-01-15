@@ -26,12 +26,15 @@ const resolver = {
   },
 
   Mutation: {
-    addProfile: async (parent, { name, email, password, role, gold }) => {
+    addProfile: async (
+      parent,
+      { name, email, password, dungeonMaster, gold }
+    ) => {
       const profile = await Profile.create({
         name,
         email,
         password,
-        role,
+        dungeonMaster,
         gold,
       });
       const token = signToken(profile);
@@ -83,6 +86,17 @@ const resolver = {
       throw new AuthenticationError(
         "You have to be logged in to make changes!"
       );
+    },
+
+    changeRole: async (parent, { profileId, setRole }, context) => {
+      if (context.user) {
+        return Profile.findOneAndUpdate(
+          { _id: profileId },
+          { $set: { dungeonMaster: setRole } },
+          { new: true, runValidators: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

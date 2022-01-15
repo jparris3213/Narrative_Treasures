@@ -6,7 +6,7 @@ const typeDefs = gql`
     name: String!
     email: String!
     password: String!
-    role: String
+    dungeonMaster: Boolean!
     inventory: [String]
     gold: Int!
   }
@@ -37,14 +37,14 @@ const typeDefs = gql`
       name: String!
       email: String!
       password: String!
-      role: String!
+      dungeonMaster: Boolean!
       gold: Int!
     ): Auth
     login(name: String!, email: String!, password: String!): Auth
 
     changeGold(profileId: ID!, goldSet: Int!): Profile
     addInventory(profileId: ID!, item: String!): Profile
-    changeRole(profileId: ID!, role: String!): Profile
+    changeRole(profileId: ID!, setRole: Boolean!): Profile
 
     addItem(
       name: String!
