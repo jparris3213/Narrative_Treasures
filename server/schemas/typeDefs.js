@@ -44,7 +44,11 @@ const typeDefs = gql`
 
     changeGold(profileId: ID!, goldSet: Int!): Profile
     addInventory(profileId: ID!, item: String!): Profile
+
     changeRole(profileId: ID!, setRole: Boolean!): Profile
+
+    removeItem(item: String!): Profile
+    removeProfile: Profile
 
     addItem(
       name: String!
