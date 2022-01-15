@@ -11,7 +11,6 @@ const Market = () => {
   const [equipments, setEquipments] = useState([]);
   useEffect(() => {
     ALL_EQUEPMENT().then(({ data }) => {
-      console.log("***", data);
       setEquipments(data.equipments);
     });
   }, []);
