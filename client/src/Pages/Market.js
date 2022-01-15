@@ -21,7 +21,11 @@ const Market = () => {
         <h1> Welcome to the Marketplace </h1>
       </div>
       <div>
-        <ul>{equipments.length && <Card equipments={equipments} />}</ul>
+        <ul>{equipments.length &&  equipments.map((equipment) => {
+        return<Card equipment={equipment} key={equipment.index} />
+        })}
+        </ul>
+    
       </div>
     </div>
   );
