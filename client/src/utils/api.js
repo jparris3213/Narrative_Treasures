@@ -6,30 +6,7 @@ async function ALL_EQUEPMENT() {
     },
     body: JSON.stringify({
       query: `
-          query MagicItems {
-            magicItems {
-              name
-              equipment_category {
-                name
-              }
-              desc
-            }
-          }
-        `,
-    }),
-  });
-  return await data.json();
-}
-
-async function MAGIC_ITEMS() {
-  let data = await fetch("https://www.dnd5eapi.co/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
-        query AllEquepment {
+          query AllEquepment {
             equipments {
               name
               equipment_category {
@@ -55,6 +32,29 @@ async function MAGIC_ITEMS() {
               }
             }
           }
+        `,
+    }),
+  });
+  return data.json();
+}
+
+async function MAGIC_ITEMS() {
+  let data = await fetch("https://www.dnd5eapi.co/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+      query MagicItems {
+        magicItems {
+          name
+          equipment_category {
+            name
+          }
+          desc
+        }
+      }
           `,
     }),
   });
