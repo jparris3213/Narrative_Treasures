@@ -1,39 +1,15 @@
 import React, { useState } from "react";
 
 function Card(props) {
-  const { equipments, magicItems, sort } = props;
-  console.log(equipments);
+  const { equipment, magicItems, sort } = props;
+
   const [isOpen, setIsOpen] = useState(false);
-  function flipCard() {
-    setIsOpen(!isOpen);
+  function flipCard(event) {
+      setIsOpen(!isOpen);
   }
 
-  return equipments.map((equipment) => {
-    let gpCost = 0;
-    if (equipment.cost.unit == "gp") {
-      gpCost = equipment.cost.quantity;
-    } else if (equipment.cost.unit == "sp") {
-      gpCost = equipment.cost.quantity * 0.1;
-    } else if (equipment.cost.unit == "cp") {
-      gpCost = equipment.cost.quantity * 0.01;
-    }
-
-    let rarity = "";
-    switch (gpCost) {
-      case gpCost <= 10:
-        rarity = "common";
-        break;
-      case gpCost <= 500:
-        rarity = "uncommon";
-        break;
-      case gpCost <= 5000:
-        rarity = "rare";
-        break;
-      default:
-        rarity = "artifact";
-    }
-
     const {
+      index,
       name,
       equipment_category: { name: categoryName },
       cost: { quantity, unit },
@@ -46,15 +22,31 @@ function Card(props) {
       properties: { name: propertyName },
     } = equipment;
 
+    let gpCost = 0;
+    if (unit === "gp") {
+      gpCost = quantity;
+    } else if (unit === "sp") {
+      gpCost = quantity * 0.1;
+    } else if (unit === "cp") {
+      gpCost = quantity * 0.01;
+    }
+
+    let rarity = "";
+    if (gpCost < 10)rarity = "common";
+    else if (gpCost < 500)rarity = "uncommon";
+    else if (gpCost < 1000)rarity = "rare";
+    else rarity = "artifact";
+
     return (
       <div
         className={isOpen ? "element-card open" : "element-card"}
         onClick={flipCard}
       >
-        <div class={`front-facing front-facing-${rarity}`}>
-          <h1 class="abr">{name}</h1>
-          <p class="title">{categoryName}</p>
-          <span class="atomic-number">
+        <div className={`front-facing front-facing-${rarity}`}>
+          <h1 className="abr">{name}</h1>
+          <p className="title">{categoryName}</p>
+          <span className="atomic-number">
+            {gpCost}<br/>
             {quantity}
             {unit}
           </span>
@@ -75,7 +67,7 @@ function Card(props) {
         </div>
       </div>
     );
-  });
-}
+  };
+
 
 export default Card;
