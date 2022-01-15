@@ -86,8 +86,7 @@ async function MONSTERS_QUERY() {
   return await data.json();
 }
 
-async function MONSTER_QUERY(index) {
-  const filter = { index: index };
+async function MONSTER_QUERY(filter) {
   let data = await fetch("https://www.dnd5eapi.co/graphql", {
     method: "POST",
     headers: {
@@ -96,7 +95,7 @@ async function MONSTER_QUERY(index) {
     body: JSON.stringify({
       query: `
         query monsterQuery($filter: FilterFindOneMonsterInput){
-            monster(filter: ${filter}){
+            monster(filter: $filter){
               index
               name
               size
@@ -168,6 +167,11 @@ async function MONSTER_QUERY(index) {
             }
           }
               `,
+      variable: {
+        filter: {
+          index: filter,
+        },
+      },
     }),
   });
   return await data.json();
