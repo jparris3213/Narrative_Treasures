@@ -8,6 +8,7 @@ async function ALL_EQUEPMENT() {
       query: `
           query AllEquepment {
             equipments {
+              index
               name
               equipment_category {
                 name
@@ -48,6 +49,7 @@ async function MAGIC_ITEMS() {
       query: `
       query MagicItems {
         magicItems {
+          index
           name
           equipment_category {
             name
@@ -58,7 +60,7 @@ async function MAGIC_ITEMS() {
           `,
     }),
   });
-  return await data.json();
+  return data.json();
 }
 
 async function MONSTERS_QUERY() {
@@ -83,7 +85,7 @@ async function MONSTERS_QUERY() {
             `,
     }),
   });
-  return await data.json();
+  return data.json();
 }
 
 async function MONSTER_QUERY(filter) {
@@ -174,7 +176,7 @@ async function MONSTER_QUERY(filter) {
       },
     }),
   });
-  return await data.json();
+  return data.json();
 }
 
 export { MAGIC_ITEMS, ALL_EQUEPMENT, MONSTERS_QUERY, MONSTER_QUERY };
