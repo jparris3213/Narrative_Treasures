@@ -1,9 +1,9 @@
 //import React from "react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = () => {
-  const [isOpen, setOpen] = useState(false);
+  //const [isOpen, setOpen] = useState(false);
   return (
     <header className="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
       <div className="container-fluid d-flex align-items-center">

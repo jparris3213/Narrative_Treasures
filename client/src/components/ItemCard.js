@@ -37,6 +37,8 @@ function Card(props) {
     else if (gpCost < 1000)rarity = "rare";
     else rarity = "artifact";
 
+    console.log(rarity)
+
     return (
       <div className="container">
       <div

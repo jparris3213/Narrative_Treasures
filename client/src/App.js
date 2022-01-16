@@ -11,15 +11,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // importing components
 import Footer from "./components/Footer";
-import Navbar from "./components/Navigation";
+import Navbar from "./components/Navbar";
 
 // Pages Import
 import Market from "./Pages/Market";
 import Inventory from "./Pages/Inventory";
 import Home from "./Pages/Home";
 import UserProfile from "./Pages/UserProfile";
-// importing pages
-//  import all pages individually
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -59,6 +57,7 @@ function App1() {
           <Route path="*" element={<Home />} />
         </Routes>
       </Router>
+      <Footer />
     </ApolloProvider>
   );
 }

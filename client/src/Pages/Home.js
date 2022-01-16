@@ -2,7 +2,7 @@ import React from "react";
 
 const Home = () => {
   return (
-    <body className="container text-center" cz-shortcut-listen="true">
+    <div className="container text-center" cz-shortcut-listen="true">
     
       <main className="form-signin d-flex justify-content-center bg-secondary mb-3">
         <form>
@@ -11,11 +11,11 @@ const Home = () => {
 
           <div className="form-floating">
             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
-            <label for="floatingInput">Email address</label>
+            <label htmlFor="floatingInput">Email address</label>
           </div>
           <div className="form-floating">
             <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
-            <label for="floatingPassword">Password</label>
+            <label htmlFor="floatingPassword">Password</label>
           </div>
 
           <div className="checkbox mb-3">
@@ -27,7 +27,7 @@ const Home = () => {
 
         </form>
       </main>
-    </body>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "../components/Cards/newcard";
+import Card from "../components/ItemCard";
 import {
   MAGIC_ITEMS,
   ALL_EQUEPMENT,
@@ -31,14 +31,7 @@ const Market = () => {
         </div>
       </div>
 
-      <div>
-        <div className="container">
-          {equipments.length &&
-            equipments.map((equipment) => {
-              return <Card equipment={equipment} key={equipment.index} />;
-            })}
-        </div>
-      </div>
+
     </div>
   );
 };
