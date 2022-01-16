@@ -7,19 +7,17 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // importing components
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 
 // Pages Import
 import Market from "./Pages/Market";
 import Inventory from "./Pages/Inventory";
 import Home from "./Pages/Home";
 import UserProfile from "./Pages/UserProfile";
-// importing pages
-//  import all pages individually
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -45,24 +43,23 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function App() {
+function App1() {
   return (
     <ApolloProvider client={client}>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/profile" element={<UserProfile />} />
+          <Route exact path="/market" element={<Market />} />
+          <Route exact path="/inventory" element={<Inventory />} />
 
-          <Router>
-            <Header />
-              <Routes>
-                <Route exact path="/" element={<Home/>}/>
-                <Route exact path="/profile" element={<UserProfile/>}/>
-                <Route exact path="/market" element={<Market/>}/>
-                <Route exact path="/inventory" element={<Inventory/>}/>
-
-                <Route path="*" element={<Home/>}/>
-              </Routes>
-              <Footer />
-    </Router>
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </Router>
+      <Footer />
     </ApolloProvider>
   );
 }
 
-export default App;
+export default App1;
