@@ -37,10 +37,11 @@ const Inventory = () => {
               <table className="table table-striped table-sm">
                 <thead>
                   <tr>
-                    <th scope="col">Dice</th>
+                    
                     <th scope="col">Item</th>
                     <th scope="col">Qty</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Dice</th>
                     <th scope="col">Cost</th>
                     <th scope="col">Market Price</th>
                     <th scope="col">Profit/Loss</th>

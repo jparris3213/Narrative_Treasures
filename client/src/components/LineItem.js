@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Item(props) {
   const { equipment, magicItems, sort } = props;
@@ -57,18 +57,19 @@ function Item(props) {
     } else {
         ferengi = "green"
     }
-
+//--------------------------------------------------------------------------------------------------------
     
     return (
 
         <tr>
-            <td>{damage_dice}</td>{/* Index or ID*/}
+            
             <td>{name}</td> {/* Item Name*/}
             <td>5</td>{/* Quantity on Hand (Needs to pull from Inventory DB*/}
             <td>{weapon_range} | {rarity} | {damageName} |  </td>{/* Range*/}
+            <td>{damage_dice}</td>{/* Damage Dice */}
             <td>{quantity} {unit}</td>{/* Base Price */}
             <td style={{color: ferengi}}>{marketprice} {unit}</td>{/* Current Market Price*/}
-            <td>{ marketprice - quantity}</td>
+            <td>{ marketprice - quantity} {unit}</td>
 
         </tr>
       );
