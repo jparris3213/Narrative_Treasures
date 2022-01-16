@@ -38,6 +38,7 @@ function Card(props) {
     else rarity = "artifact";
 
     return (
+      <div className="container">
       <div
         className={isOpen ? "element-card open" : "element-card"}
         onClick={flipCard}
@@ -66,6 +67,7 @@ function Card(props) {
           </p>
         </div>
       </div>
+    </div>
     );
   };
 

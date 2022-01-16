@@ -17,15 +17,27 @@ const Market = () => {
 
   return (
     <div>
-      <div>
-        <h1> Welcome to the Marketplace </h1>
+      <div className="container text-center">
+        <h1> Welcome to Sword-Mart</h1>
+        <p>Remember: Shop Smart...Shop S-Mart</p>
       </div>
+
+      <div className="container">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
+          {equipments.length &&
+            equipments.map((equipment) => {
+              return <Card equipment={equipment} key={equipment.index} />;
+            })}
+        </div>
+      </div>
+
       <div>
-        <ul>{equipments.length &&  equipments.map((equipment) => {
-        return<Card equipment={equipment} key={equipment.index} />
-        })}
-        </ul>
-    
+        <div className="container">
+          {equipments.length &&
+            equipments.map((equipment) => {
+              return <Card equipment={equipment} key={equipment.index} />;
+            })}
+        </div>
       </div>
     </div>
   );

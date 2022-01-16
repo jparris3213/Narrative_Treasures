@@ -1,71 +1,76 @@
-import React from "react";
-// import React, { useState } from "react";
+//import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [isOpen, setOpen] = useState(false);
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
-      <div className="container">
-        <div className="navbar-brand">
-          <a
-            role="button"
-            className={`navbar-burger burger ${isOpen && "is-active"}`}
-            aria-label="menu"
-            aria-expanded="false"
-            onClick={() => setOpen(!isOpen)}
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-        <div className={`navbar-menu ${isOpen && "is-active"}`}>
-          <div className="navbar-start">
-            <Link
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/Home"
+    <header className="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
+      <div className="container-fluid d-flex align-items-center">
+        <h1 className="d-flex align-items-center fs-4 text-white mb-0">
+          Narrative Treasures
+        </h1>
+        <nav
+          className="navbar navbar-expand-sm navbar-dark bg-dark"
+          aria-label="Third navbar example"
+        >
+          <div className="container-fluid">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarsExample03"
+              aria-controls="navbarsExample03"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
-              Home
-            </Link>
+              <span className="navbar-toggler-icon"></span>
+            </button>
 
-            <Link
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/UserProfile"
-            >
-              Account
-            </Link>
-
-            <Link
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/Inventory"
-            >
-              Inventory
-            </Link>
-
-            <Link
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/Market"
-            >
-              Market
-            </Link>
-          </div>
-
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <a className="button is-white">Log in</a>
-              </div>
+            <div className="collapse navbar-collapse" id="navbarsExample03">
+              <ul className="navbar-nav me-auto mb-2 mb-sm-0">
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    activeclassname="is-active"
+                    to="/Home"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    activeclassname="is-active"
+                    to="/Inventory"
+                  >
+                    Inventory
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    activeclassname="is-active"
+                    to="/Market"
+                  >
+                    Market
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    activeclassname="is-active"
+                    to="/profile"
+                  >
+                    Profile
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 };
 // function Navigation() {
