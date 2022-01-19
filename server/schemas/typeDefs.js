@@ -21,7 +21,16 @@ const typeDefs = gql`
   }
 
   type DMStore {
-    _id: 
+    _id: ID!
+    name: String!,
+    playerList: [String],
+    filter: {
+      goldFilter: Int,
+      weaponTypeFilter: String,
+      armorFilter: Boolean,
+      weaponFilter: boolean,
+    },
+    inflationVariable: Int
   }
 
   type Auth {
@@ -35,6 +44,7 @@ const typeDefs = gql`
     me: Profile
     items: [Item]!
     item(itemId: ID!): Item
+    storeFilter(storeId: ID!): DMStore
   }
 
   type Mutation {

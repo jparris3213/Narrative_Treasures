@@ -1,11 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 const dmStoreSchema = new Schema({
-  uuid: {
-    type: String,
-    required: true,
-  },
-
   name: {
     type: String,
     required: true,
@@ -27,14 +22,19 @@ const dmStoreSchema = new Schema({
       type: String,
       required: false,
     },
-    rarityFilter: {
-      type: String,
+    armorFilter: {
+      type: Boolean,
       required: false,
     },
-    inflationVariable: {
-      type: Number,
+    weaponFilter: {
+      type: Boolean,
       required: false,
     },
+  },
+
+  inflationVariable: {
+    type: Number,
+    required: false,
   },
 });
 
