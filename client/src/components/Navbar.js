@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 const Navigation = () => {
   //const [isOpen, setOpen] = useState(false);
   return (
-    <header className="bd-header bg-dark py-3 d-flex align-items-stretch border-bottom border-dark">
+    <header className="bd-header py-3 d-flex align-items-stretch border-bottom border-dark">
       <div className="container-fluid d-flex align-items-center">
         <h1 className="d-flex align-items-center fs-4 text-white mb-0">
           Narrative Treasures
         </h1>
         <nav
-          className="navbar navbar-expand-sm navbar-dark bg-dark"
+          className="navbar navbar-expand-sm navbar-dark"
           aria-label="Third navbar example"
         >
           <div className="container-fluid">
@@ -69,6 +69,13 @@ const Navigation = () => {
             </div>
           </div>
         </nav>
+        <img
+          className="bg-light rounded-circle"
+          src="https://www.freeiconspng.com/thumbs/dragon-png/dragon-png-20.png"
+          alt=""
+          width="75"
+          height="75"
+        />
       </div>
     </header>
   );

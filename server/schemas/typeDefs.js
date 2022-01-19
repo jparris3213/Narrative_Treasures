@@ -9,6 +9,7 @@ const typeDefs = gql`
     dungeonMaster: Boolean!
     inventory: [String]
     gold: Int!
+    savedFilters: [String]
   }
 
   type Item {
@@ -17,6 +18,19 @@ const typeDefs = gql`
     cost: Int!
     equipmentType: String!
     description: String
+  }
+
+  type DMStore {
+    _id: ID!
+    name: String!,
+    playerList: [String],
+    filter: {
+      goldFilter: Int,
+      weaponTypeFilter: String,
+      armorFilter: Boolean,
+      weaponFilter: boolean,
+    },
+    inflationVariable: Int
   }
 
   type Auth {
@@ -30,6 +44,7 @@ const typeDefs = gql`
     me: Profile
     items: [Item]!
     item(itemId: ID!): Item
+    storeFilter(storeId: ID!): DMStore
   }
 
   type Mutation {

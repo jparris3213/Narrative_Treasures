@@ -36,6 +36,12 @@ const profileSchema = new Schema({
     required: true,
     default: 125,
   },
+  savedFilters: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
 });
 
 // set up pre-save middleware to create password
