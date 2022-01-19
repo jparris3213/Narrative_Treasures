@@ -33,8 +33,8 @@ function Item(props) {
     else rarity = "Artifact";
 
     //Randomization function for 'market pricing' --needs moved to seperate .js eventually
-    const markup = (Math.random() * (50 - 1) + 1)/100;
-
+    const markup = (1 + Math.random());
+    console.log(markup);
     let marketprice = 0;
 
     if (rarity === "artifact") {
@@ -68,8 +68,8 @@ function Item(props) {
             <td>{weapon_range} | {rarity} | {damageName} |  </td>{/* Range*/}
             <td>{damage_dice}</td>{/* Damage Dice */}
             <td>{quantity} {unit}</td>{/* Base Price */}
-            <td style={{color: ferengi}}>{marketprice} {unit}</td>{/* Current Market Price*/}
-            <td>{ marketprice - quantity} {unit}</td>
+            <td>{marketprice} {unit}</td>{/* Current Market Price*/}
+            <td style={{color: ferengi}}>{ marketprice - quantity} {unit}</td>
 
         </tr>
       );

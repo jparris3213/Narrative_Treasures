@@ -1,3 +1,54 @@
 import { gql } from "@apollo/client";
 
-// queries
+//gets all users in our database
+export const QUERY_PROFILES = gql`
+  query profiles {
+    profiles {
+      _id
+      name
+      email
+      dungeonMaster
+      inventory
+      gold
+    }
+  }
+`;
+
+//gets a single user from our database
+export const QUERY_GET_USER = gql`
+  query getUser($profileId: ID!) {
+    profile(profileId: $profileId) {
+      _id
+      name
+      email
+      dungeonMaster
+      inventory
+      gold
+    }
+  }
+`;
+
+//gets the logged in user
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      name
+      email
+      dungeonMaster
+      inventory
+      gold
+    }
+  }
+`;
+
+//gets all the items in our database
+export const QUERY_GET_ITEMS = gql`
+  query getItems {
+    _id
+    name
+    equipmentType
+    cost
+    description
+  }
+`;
