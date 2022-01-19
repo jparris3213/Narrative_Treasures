@@ -33,3 +33,7 @@ const dmStoreSchema = new Schema({
     },
   },
 });
+
+const DMStore = model("DMStore", dmStoreSchema);
+
+module.exports = DMStore;
