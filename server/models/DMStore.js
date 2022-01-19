@@ -31,6 +31,10 @@ const dmStoreSchema = new Schema({
       type: String,
       required: false,
     },
+    inflationVariable: {
+      type: Number,
+      required: false,
+    },
   },
 });
 
