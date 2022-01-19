@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function MarketForm() {
+function MarketForm({ updateSort }) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
   const [noArmor, setNoArmor] = useState(false);
@@ -40,7 +40,14 @@ function MarketForm() {
       return;
     }
 
-    console.log(maxValue);
+    updateSort({
+      minValue: minValue,
+      maxValue: maxValue,
+      noArmor: noArmor,
+      noWeapons: noWeapons,
+      noMagicItems: noMagicItems,
+      noAventuringGear: noAventuringGear,
+    });
   };
 
   return (
