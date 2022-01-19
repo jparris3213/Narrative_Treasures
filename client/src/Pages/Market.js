@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/ItemCard";
+import MarketForm from "../components/MarketForm";
 import {
   MAGIC_ITEMS,
   ALL_EQUEPMENT,
@@ -17,6 +18,7 @@ const Market = () => {
 
   return (
     <div>
+      <MarketForm />
       <div className="container text-center">
         <h1> Welcome to Sword-Mart</h1>
         <p>Remember: Shop Smart...Shop S-Mart</p>
@@ -30,8 +32,6 @@ const Market = () => {
             })}
         </div>
       </div>
-
-
     </div>
   );
 };
