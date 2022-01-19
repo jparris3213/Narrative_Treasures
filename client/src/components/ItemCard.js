@@ -4,6 +4,7 @@ function Card(props) {
   const { equipment, magicItems, sort } = props;
 
   const [isOpen, setIsOpen] = useState(false);
+
   function flipCard(event) {
     setIsOpen(!isOpen);
   }
