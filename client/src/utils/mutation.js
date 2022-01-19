@@ -44,3 +44,26 @@ export const CHANGE_ROLE = gql`
     }
   }
 `;
+
+//mutation used for users creating their own item
+export const ADD_ITEM = gql`
+  mutation addItem(
+    $name: String!
+    $cost: Int!
+    $equipmentType: String!
+    $description: String!
+  ) {
+    addItem(
+      name: $name
+      cost: $cost
+      equipmentType: $equipmentType
+      description: $description
+    ) {
+      _id
+      name
+      cost
+      equipmentType
+      description
+    }
+  }
+`;

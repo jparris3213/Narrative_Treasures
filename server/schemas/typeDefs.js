@@ -9,6 +9,7 @@ const typeDefs = gql`
     dungeonMaster: Boolean!
     inventory: [String]
     gold: Int!
+    savedFilters: [String]
   }
 
   type Item {
@@ -17,6 +18,10 @@ const typeDefs = gql`
     cost: Int!
     equipmentType: String!
     description: String
+  }
+
+  type DMStore {
+    _id: 
   }
 
   type Auth {
