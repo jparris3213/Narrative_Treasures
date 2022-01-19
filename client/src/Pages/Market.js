@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/ItemCard";
+import MarketForm from "../components/MarketForm";
 import {
   MAGIC_ITEMS,
   ALL_EQUEPMENT,
@@ -9,14 +10,21 @@ import {
 
 const Market = () => {
   const [equipments, setEquipments] = useState([]);
+  const [sort, setSort] = useState({});
+
   useEffect(() => {
     ALL_EQUEPMENT().then(({ data }) => {
       setEquipments(data.equipments);
     });
   }, []);
 
+  function updateSort(newSort) {
+    setSort(newSort);
+  }
+
   return (
     <div>
+      <MarketForm updateSort={updateSort} />
       <div className="container text-center">
         <h1> Welcome to Sword-Mart</h1>
         <p>Remember: Shop Smart...Shop S-Mart</p>
@@ -30,8 +38,6 @@ const Market = () => {
             })}
         </div>
       </div>
-
-
     </div>
   );
 };

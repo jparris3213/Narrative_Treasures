@@ -4,43 +4,42 @@ function Card(props) {
   const { equipment, magicItems, sort } = props;
 
   const [isOpen, setIsOpen] = useState(false);
+
   function flipCard(event) {
-      setIsOpen(!isOpen);
+    setIsOpen(!isOpen);
   }
 
-    const {
-      index,
-      name,
-      equipment_category: { name: categoryName },
-      cost: { quantity, unit },
-      weapon_range,
-      damage: {
-        damage_dice,
-        damage_type: { name: damageName },
-      },
-      range: { normal, long },
-      properties: { name: propertyName },
-    } = equipment;
+  const {
+    index,
+    name,
+    equipment_category: { name: categoryName },
+    cost: { quantity, unit },
+    weapon_range,
+    damage: {
+      damage_dice,
+      damage_type: { name: damageName },
+    },
+    range: { normal, long },
+    properties: { name: propertyName },
+  } = equipment;
 
-    let gpCost = 0;
-    if (unit === "gp") {
-      gpCost = quantity;
-    } else if (unit === "sp") {
-      gpCost = quantity * 0.1;
-    } else if (unit === "cp") {
-      gpCost = quantity * 0.01;
-    }
+  let gpCost = 0;
+  if (unit === "gp") {
+    gpCost = quantity;
+  } else if (unit === "sp") {
+    gpCost = quantity * 0.1;
+  } else if (unit === "cp") {
+    gpCost = quantity * 0.01;
+  }
 
-    let rarity = "";
-    if (gpCost < 10)rarity = "common";
-    else if (gpCost < 500)rarity = "uncommon";
-    else if (gpCost < 1000)rarity = "rare";
-    else rarity = "artifact";
+  let rarity = "";
+  if (gpCost < 10) rarity = "common";
+  else if (gpCost < 500) rarity = "uncommon";
+  else if (gpCost < 1000) rarity = "rare";
+  else rarity = "artifact";
 
-    console.log(rarity)
-
-    return (
-      <div className="container">
+  return (
+    <div className="container">
       <div
         className={isOpen ? "element-card open" : "element-card"}
         onClick={flipCard}
@@ -49,7 +48,8 @@ function Card(props) {
           <h1 className="abr">{name}</h1>
           <p className="title">{categoryName}</p>
           <span className="atomic-number">
-            {gpCost}<br/>
+            {gpCost}
+            <br />
             {quantity}
             {unit}
           </span>
@@ -70,8 +70,7 @@ function Card(props) {
         </div>
       </div>
     </div>
-    );
-  };
-
+  );
+}
 
 export default Card;
