@@ -21,20 +21,21 @@ const Market = () => {
         basic: true,
       }));
       setEquipments(hold);
-      setDisplayItems(...displayItems, ...equipments);
+      setDisplayItems([...displayItems, ...equipments]);
+      console.log(displayItems);
     });
   }, []);
 
-  useEffect(() => {
-    MAGIC_ITEMS().then(({ data }) => {
-      const hold = data.magicItems.map((magicItem) => ({
-        ...magicItem,
-        magic: true,
-      }));
-      setMagicItems(hold);
-      setDisplayItems(...displayItems, ...magicItems);
-    });
-  }, []);
+  // useEffect(() => {
+  //   MAGIC_ITEMS().then(({ data }) => {
+  //     const hold = data.magicItems.map((magicItem) => ({
+  //       ...magicItem,
+  //       magic: true,
+  //     }));
+  //     setMagicItems(hold);
+  //     setDisplayItems([...displayItems, ...magicItems]);
+  //   });
+  // }, []);
 
   function updateSort(newSort) {
     setSort(newSort);
