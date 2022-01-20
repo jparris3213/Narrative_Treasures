@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Card(props) {
-  const { equipment, magicItems, sort } = props;
+  const { item, sort } = props;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,6 +12,8 @@ function Card(props) {
   const {
     index,
     name,
+    basic,
+    magic,
     equipment_category: { name: categoryName },
     cost: { quantity, unit },
     weapon_range,
@@ -21,7 +23,8 @@ function Card(props) {
     },
     range: { normal, long },
     properties: { name: propertyName },
-  } = equipment;
+    desc,
+  } = item;
 
   let gpCost = 0;
   if (unit === "gp") {
@@ -38,39 +41,67 @@ function Card(props) {
   else if (gpCost < 1000) rarity = "rare";
   else rarity = "artifact";
 
-  return (
-    <div className="container">
-      <div
-        className={isOpen ? "element-card open" : "element-card"}
-        onClick={flipCard}
-      >
-        <div className={`front-facing front-facing-${rarity}`}>
-          <h1 className="abr">{name}</h1>
-          <p className="title">{categoryName}</p>
-          <span className="atomic-number">
-            {gpCost}
-            <br />
-            {quantity}
-            {unit}
-          </span>
-        </div>
-        <div className={`back-facing ${rarity}`}>
-          <p>Range: {weapon_range}</p>
-          <p>Damage: {damage_dice}</p>
-          <p>Damage type: {damageName}</p>
-          <p>
-            <a
-              className="btn"
-              href="This will add to inventory"
-              target="_blank"
-            >
-              Add to inventory
-            </a>
-          </p>
+  if (magic) {
+    return (
+      <div className="container">
+        <div
+          className={isOpen ? "element-card open" : "element-card"}
+          onClick={flipCard}
+        >
+          <div className={`front-facing front-facing-${rarity}`}>
+            <h1 className="abr">{name}</h1>
+            <p className="title">{categoryName}</p>
+            <span className="atomic-number"></span>
+          </div>
+          <div className={`back-facing ${rarity}`}>
+            <p>{desc}</p>
+
+            <p>
+              <a
+                className="btn"
+                href="This will add to inventory"
+                target="_blank"
+              >
+                Add to inventory
+              </a>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="container">
+        <div
+          className={isOpen ? "element-card open" : "element-card"}
+          onClick={flipCard}
+        >
+          <div className={`front-facing front-facing-${rarity}`}>
+            <h1 className="abr">{name}</h1>
+            <p className="title">{categoryName}</p>
+            <span className="atomic-number">
+              {quantity}
+              {unit}
+            </span>
+          </div>
+          <div className={`back-facing ${rarity}`}>
+            <p>Range: {weapon_range}</p>
+            <p>Damage: {damage_dice}</p>
+            <p>Damage type: {damageName}</p>
+            <p>
+              <a
+                className="btn"
+                href="This will add to inventory"
+                target="_blank"
+              >
+                Add to inventory
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Card;

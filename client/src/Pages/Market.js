@@ -10,11 +10,29 @@ import {
 
 const Market = () => {
   const [equipments, setEquipments] = useState([]);
+  const [magicItems, setMagicItems] = useState([]);
+  const [displayItems, setDisplayItems] = useState([]);
   const [sort, setSort] = useState({});
 
   useEffect(() => {
     ALL_EQUEPMENT().then(({ data }) => {
-      setEquipments(data.equipments);
+      const hold = data.equipments.map((equipment) => ({
+        ...equipment,
+        basic: true,
+      }));
+      setEquipments(hold);
+      setDisplayItems(...displayItems, ...equipments);
+    });
+  }, []);
+
+  useEffect(() => {
+    MAGIC_ITEMS().then(({ data }) => {
+      const hold = data.magicItems.map((magicItem) => ({
+        ...magicItem,
+        magic: true,
+      }));
+      setMagicItems(hold);
+      setDisplayItems(...displayItems, ...magicItems);
     });
   }, []);
 
@@ -32,9 +50,9 @@ const Market = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
-          {equipments.length &&
-            equipments.map((equipment) => {
-              return <Card equipment={equipment} key={equipment.index} />;
+          {displayItems.length &&
+            displayItems.map((item) => {
+              return <Card item={item} key={item.index} />;
             })}
         </div>
       </div>
