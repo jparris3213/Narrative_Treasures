@@ -5,8 +5,9 @@ function MarketForm({ updateSort }) {
   const [maxValue, setMaxValue] = useState(0);
   const [noArmor, setNoArmor] = useState(false);
   const [noWeapons, setNoWeapons] = useState(false);
-  const [noMagicItems, setNoMagicItems] = useState(false);
   const [noAventuringGear, setNoAventuringGear] = useState(false);
+  const [noTools, setNoTools] = useState(false);
+  const [noMountsVehicles, setNoMountsVehicles] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
@@ -22,10 +23,12 @@ function MarketForm({ updateSort }) {
       setNoArmor(inputValue);
     } else if (inputType === "noWeapons") {
       setNoWeapons(inputValue);
-    } else if (inputType === "noMagicItems") {
-      setNoMagicItems(inputValue);
     } else if (inputType === "noAventuringGear") {
       setNoAventuringGear(inputValue);
+    } else if (inputType === "noTools") {
+      setNoTools(inputValue);
+    } else if (inputType === "noMountsVehicles") {
+      setNoMountsVehicles(inputValue);
     }
   };
 
@@ -45,7 +48,6 @@ function MarketForm({ updateSort }) {
       maxValue: maxValue,
       noArmor: noArmor,
       noWeapons: noWeapons,
-      noMagicItems: noMagicItems,
       noAventuringGear: noAventuringGear,
     });
   };
@@ -64,7 +66,7 @@ function MarketForm({ updateSort }) {
             onChange={handleInputChange}
           />
           <br />
-          <label>Maximum Gold vValue:</label>
+          <label>Maximum Gold Value:</label>
           <br />
           <input
             type="number"
@@ -74,41 +76,54 @@ function MarketForm({ updateSort }) {
             onChange={handleInputChange}
           />
           <br />
+          <p>Use decimals to do a lower value.</p>
         </div>
         <fieldset className="p-4">
           <legend>Exclude</legend>
-          <input
-            type="checkbox"
-            name="noArmor"
-            value={noArmor}
-            onChange={handleInputChange}
-          />
-          <label> Armor</label>
-          <br />
-          <input
-            type="checkbox"
-            name="noWeapons"
-            value={noWeapons}
-            onChange={handleInputChange}
-          />
-          <label> Weapons</label>
-          <br />
-          <input
-            type="checkbox"
-            name="noMagicItems"
-            value={noMagicItems}
-            onChange={handleInputChange}
-          />
-          <label> Magic Items</label>
-          <br />
-          <input
-            type="checkbox"
-            name="noAventuringGear"
-            value={noAventuringGear}
-            onChange={handleInputChange}
-          />
-          <label> Aventuring Gear</label>
-          <br />
+          <div className="d-flex flex-row">
+            <div>
+              <input
+                type="checkbox"
+                name="noArmor"
+                value={noArmor}
+                onChange={handleInputChange}
+              />
+              <label> Armor</label>
+              <br />
+              <input
+                type="checkbox"
+                name="noWeapons"
+                value={noWeapons}
+                onChange={handleInputChange}
+              />
+              <label> Weapons</label>
+              <br />
+              <input
+                type="checkbox"
+                name="noAventuringGear"
+                value={noAventuringGear}
+                onChange={handleInputChange}
+              />
+              <label> Aventuring Gear</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name="noTools"
+                value={noTools}
+                onChange={handleInputChange}
+              />
+              <label> Tools</label>
+              <br />
+              <input
+                type="checkbox"
+                name="noMountsVehicles"
+                value={noMountsVehicles}
+                onChange={handleInputChange}
+              />
+              <label> Mounts and Vehicles</label>
+            </div>
+          </div>
         </fieldset>
       </div>
       <div className="p-2 d-flex flex-column align-items-center">
