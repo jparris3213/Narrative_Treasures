@@ -7,7 +7,8 @@ async function ALL_EQUEPMENT() {
     body: JSON.stringify({
       query: `
           query AllEquepment {
-            equipments(limit: 236 ) {
+            equipments(limit: 250 ) {
+              index
               name
               equipment_category {
                 name
@@ -40,6 +41,13 @@ async function ALL_EQUEPMENT() {
               stealth_disadvantage
               weight
               desc
+              tool_category
+              vehicle_category
+              speed{
+                quantity
+                unit
+              }
+              capacity
             }
           }
         `,

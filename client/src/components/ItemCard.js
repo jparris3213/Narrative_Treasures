@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function Card(props) {
   const { item, sort } = props;
-  const discStyle = { fontSize: "10px" };
+  const discStyle = { fontSize: "8px" };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,6 +27,10 @@ function Card(props) {
     str_minimum: strMinimun,
     stealth_disadvantage: stealthDisadvantage,
     desc,
+    tool_category: toolCategory,
+    vehicle_category: vehicleCategory,
+    speed: { quantity: speedQuantity, unit: speedUnit },
+    capacity,
   } = item;
 
   let gpCost = 0;
@@ -39,10 +43,11 @@ function Card(props) {
   }
 
   let rarity = "";
-  if (!gpCost) rarity = "artifact";
-  else if (gpCost < 10) rarity = "common";
+
+  if (gpCost < 10) rarity = "common";
   else if (gpCost < 500) rarity = "uncommon";
-  else rarity = "rare";
+  else if (gpCost < 2500) rarity = "rare";
+  else rarity = "artifact";
 
   return (
     <div className="container">
@@ -67,6 +72,7 @@ function Card(props) {
             {weapon_range === "Ranged" && <p>long: {long}</p>}
             <p>Damage: {damage_dice}</p>
             <p>Damage type: {damageName}</p>
+            <p>Properties:</p>
             <p>
               <a
                 className="btn"
@@ -113,6 +119,78 @@ function Card(props) {
             </p>
           </div>
         )}
+        {categoryName === "Tools" && (
+          <div className={`back-facing ${rarity}`}>
+            <p>weight: {weight}</p>
+            <p>{toolCategory}</p>
+            <p>
+              <a
+                className="btn"
+                href="This will add to inventory"
+                target="_blank"
+              >
+                Add to inventory
+              </a>
+            </p>
+          </div>
+        )}
+        {categoryName === "Mounts and Vehicles" &&
+          vehicleCategory === "Mounts and Other Animals" && (
+            <div className={`back-facing ${rarity}`}>
+              <p>{vehicleCategory}</p>
+              <p>
+                Speed: {speedQuantity}
+                {speedUnit}
+              </p>
+              <p>Capacity: {capacity}</p>
+              <p>
+                <a
+                  className="btn"
+                  href="This will add to inventory"
+                  target="_blank"
+                >
+                  Add to inventory
+                </a>
+              </p>
+            </div>
+          )}
+        {categoryName === "Mounts and Vehicles" &&
+          vehicleCategory === "Tack, Harness, and Drawn Vehicles" && (
+            <div className={`back-facing ${rarity}`}>
+              <p>{vehicleCategory}</p>
+              <p>Weight: {weight}</p>
+              <p style={discStyle}>{desc}</p>
+              <p>
+                <a
+                  className="btn"
+                  href="This will add to inventory"
+                  target="_blank"
+                >
+                  Add to inventory
+                </a>
+              </p>
+            </div>
+          )}
+        {categoryName === "Mounts and Vehicles" &&
+          vehicleCategory === "Waterborne Vehicles" && (
+            <div className={`back-facing ${rarity}`}>
+              <p>{vehicleCategory}</p>
+              <p>
+                Speed: {speedQuantity}
+                {speedUnit}
+              </p>
+              <p style={discStyle}>{desc}</p>
+              <p>
+                <a
+                  className="btn"
+                  href="This will add to inventory"
+                  target="_blank"
+                >
+                  Add to inventory
+                </a>
+              </p>
+            </div>
+          )}
       </div>
     </div>
   );
