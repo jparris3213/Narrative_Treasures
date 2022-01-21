@@ -19,6 +19,7 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  //if true then DM role is active
   dungeonMaster: {
     type: Boolean,
     required: false,
@@ -36,6 +37,7 @@ const profileSchema = new Schema({
     required: true,
     default: 125,
   },
+  //used for saving a personal shop with filters for DMs only
   savedFilters: [
     {
       type: String,
