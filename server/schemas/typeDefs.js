@@ -22,14 +22,13 @@ const typeDefs = gql`
 
   type DMStore {
     _id: ID!
-    name: String!,
-    playerList: [String],
-    filter: {
-      goldFilter: Int,
-      weaponTypeFilter: String,
-      armorFilter: Boolean,
-      weaponFilter: boolean,
-    },
+    name: String!
+    playerList: [String]
+    filter: [String]
+    goldFilter: Int
+    weaponTypeFilter: String
+    armorFilter: Boolean
+    weaponFilter: Boolean
     inflationVariable: Int
   }
 
