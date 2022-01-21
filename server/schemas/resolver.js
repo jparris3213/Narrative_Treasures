@@ -133,7 +133,7 @@ const resolver = {
     },
 
     addFilter: async (
-      paranet,
+      parent,
       {
         name,
         playerList,
@@ -154,6 +154,13 @@ const resolver = {
         weaponFilter,
         inflationVariable,
       });
+    },
+    addFilterToUser: async (parant, { profileId, filterId }) => {
+      return Profile.findOneAndUpdate(
+        { _id: profileId },
+        { $addToSet: { savedFilters: filterId } },
+        { new: true }
+      );
     },
   },
 };

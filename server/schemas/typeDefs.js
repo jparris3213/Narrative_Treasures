@@ -80,6 +80,8 @@ const typeDefs = gql`
       weaponFilter: Boolean
       inflationVariable: Int
     ): DMStore
+
+    addFilterToUser(profileId: ID!, filterId: ID!): Profile
   }
 `;
 
