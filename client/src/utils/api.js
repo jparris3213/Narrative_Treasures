@@ -7,8 +7,7 @@ async function ALL_EQUEPMENT() {
     body: JSON.stringify({
       query: `
           query AllEquepment {
-            equipments {
-              index
+            equipments(limit: 236 ) {
               name
               equipment_category {
                 name
@@ -31,6 +30,15 @@ async function ALL_EQUEPMENT() {
               properties {
                 name
               }
+              armor_category
+              armor_class{
+                base
+                dex_bonus
+                max_bonus
+              }
+              str_minimum
+              stealth_disadvantage
+              weight
             }
           }
         `,

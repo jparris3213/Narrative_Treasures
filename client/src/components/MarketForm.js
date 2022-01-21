@@ -112,7 +112,11 @@ function MarketForm({ updateSort }) {
         </fieldset>
       </div>
       <div className="p-2 d-flex flex-column align-items-center">
-        <input type="submit" onClick={hadleFormSubmit} className="w-25" />
+        <input
+          type="submit"
+          onClick={hadleFormSubmit}
+          className="btn text-light w-25"
+        />
         {errorMessage && (
           <div>
             <p className="error-text">{errorMessage}</p>

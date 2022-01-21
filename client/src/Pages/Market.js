@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/ItemCard";
 import MarketForm from "../components/MarketForm";
-import {
-  MAGIC_ITEMS,
-  ALL_EQUEPMENT,
-  MONSTERS_QUERY,
-  MONSTER_QUERY,
-} from "../utils/api";
+import { ALL_EQUEPMENT, MONSTERS_QUERY, MONSTER_QUERY } from "../utils/api";
 
 const Market = () => {
   const [equipments, setEquipments] = useState([]);
@@ -32,9 +27,9 @@ const Market = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
-          {equipments.length &&
-            equipments.map((equipment) => {
-              return <Card equipment={equipment} key={equipment.index} />;
+          {equipments.length !== 0 &&
+            equipments.map((item) => {
+              return <Card item={item} key={item.index} />;
             })}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Card(props) {
-  const { equipment, magicItems, sort } = props;
+  const { item, sort } = props;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,8 +20,13 @@ function Card(props) {
       damage_type: { name: damageName },
     },
     range: { normal, long },
-    properties: { name: propertyName },
-  } = equipment;
+    properties,
+    armor_category: armorCategory,
+    armor_class: { base, dex_bonus: dexBonus, max_bonus: maxBonus },
+    weight,
+    str_minimum: strMinimun,
+    stealth_disadvantage: stealthDisadvantage,
+  } = item;
 
   let gpCost = 0;
   if (unit === "gp") {
@@ -33,10 +38,10 @@ function Card(props) {
   }
 
   let rarity = "";
-  if (gpCost < 10) rarity = "common";
+  if (!gpCost) rarity = "artifact";
+  else if (gpCost < 10) rarity = "common";
   else if (gpCost < 500) rarity = "uncommon";
-  else if (gpCost < 1000) rarity = "rare";
-  else rarity = "artifact";
+  else rarity = "rare";
 
   return (
     <div className="container">
@@ -47,27 +52,49 @@ function Card(props) {
         <div className={`front-facing front-facing-${rarity}`}>
           <h1 className="abr">{name}</h1>
           <p className="title">{categoryName}</p>
-          <span className="atomic-number">
-            {gpCost}
-            <br />
-            {quantity}
-            {unit}
-          </span>
+          {quantity && (
+            <span className="atomic-number">
+              {quantity}
+              {unit}
+            </span>
+          )}
         </div>
-        <div className={`back-facing ${rarity}`}>
-          <p>Range: {weapon_range}</p>
-          <p>Damage: {damage_dice}</p>
-          <p>Damage type: {damageName}</p>
-          <p>
-            <a
-              className="btn"
-              href="This will add to inventory"
-              target="_blank"
-            >
-              Add to inventory
-            </a>
-          </p>
-        </div>
+        {categoryName === "Weapon" && (
+          <div className={`back-facing ${rarity}`}>
+            <p>Range: {weapon_range}</p>
+            <p>Damage: {damage_dice}</p>
+            <p>Damage type: {damageName}</p>
+            <p>
+              <a
+                className="btn"
+                href="This will add to inventory"
+                target="_blank"
+              >
+                Add to inventory
+              </a>
+            </p>
+          </div>
+        )}
+        {categoryName === "Armor" && (
+          <div className={`back-facing ${rarity}`}>
+            <p>Armor Category: {armorCategory}</p>
+            <p>Base Armor Class: {base}</p>
+            {strMinimun === true && <p>Str Minimum: {strMinimun}</p>}
+            <p>Weight: {weight}</p>
+            <p>Properties:</p>
+            {dexBonus && <p>Dex Bonus</p>}
+            {stealthDisadvantage && <p>Stealth Disadvantage</p>}
+            <p>
+              <a
+                className="btn"
+                href="This will add to inventory"
+                target="_blank"
+              >
+                Add to inventory
+              </a>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
