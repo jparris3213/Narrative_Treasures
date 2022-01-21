@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function Card(props) {
   const { item, sort } = props;
+  const discStyle = { fontSize: "10px" };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,12 +21,12 @@ function Card(props) {
       damage_type: { name: damageName },
     },
     range: { normal, long },
-    properties,
     armor_category: armorCategory,
-    armor_class: { base, dex_bonus: dexBonus, max_bonus: maxBonus },
+    armor_class: { base, dex_bonus: dexBonus },
     weight,
     str_minimum: strMinimun,
     stealth_disadvantage: stealthDisadvantage,
+    desc,
   } = item;
 
   let gpCost = 0;
@@ -62,6 +63,8 @@ function Card(props) {
         {categoryName === "Weapon" && (
           <div className={`back-facing ${rarity}`}>
             <p>Range: {weapon_range}</p>
+            {weapon_range === "Ranged" && <p>normal: {normal}</p>}
+            {weapon_range === "Ranged" && <p>long: {long}</p>}
             <p>Damage: {damage_dice}</p>
             <p>Damage type: {damageName}</p>
             <p>
@@ -84,6 +87,21 @@ function Card(props) {
             <p>Properties:</p>
             {dexBonus && <p>Dex Bonus</p>}
             {stealthDisadvantage && <p>Stealth Disadvantage</p>}
+            <p>
+              <a
+                className="btn"
+                href="This will add to inventory"
+                target="_blank"
+              >
+                Add to inventory
+              </a>
+            </p>
+          </div>
+        )}
+        {categoryName === "Adventuring Gear" && (
+          <div className={`back-facing ${rarity}`}>
+            <p>weight: {weight}</p>
+            <p style={discStyle}>{desc}</p>
             <p>
               <a
                 className="btn"
