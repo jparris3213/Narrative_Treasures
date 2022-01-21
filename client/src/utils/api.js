@@ -39,6 +39,7 @@ async function ALL_EQUEPMENT() {
               str_minimum
               stealth_disadvantage
               weight
+              desc
             }
           }
         `,
