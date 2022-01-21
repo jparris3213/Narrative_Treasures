@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Profile } = require("../models");
 const { Item } = require("../models");
+const { DMStore } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolver = {
@@ -22,6 +23,9 @@ const resolver = {
     },
     item: async (parent, { itemId }) => {
       return Item.findOne({ _id: itemId });
+    },
+    storeFilter: async (parent, { storeId }) => {
+      return DMStore.findOne({ _id: storeId });
     },
   },
 
@@ -126,6 +130,37 @@ const resolver = {
         return Item.create({ name, cost, equipmentType, description });
       }
       throw new AuthenticationError("You must be logged in!");
+    },
+
+    addFilter: async (
+      parent,
+      {
+        name,
+        playerList,
+        filter,
+        goldFilter,
+        weaponTypeFilter,
+        armorFilter,
+        weaponFilter,
+        inflationVariable,
+      }
+    ) => {
+      return DMStore.create({
+        name,
+        playerList,
+        goldFilter,
+        weaponTypeFilter,
+        armorFilter,
+        weaponFilter,
+        inflationVariable,
+      });
+    },
+    addFilterToUser: async (parant, { profileId, filterId }) => {
+      return Profile.findOneAndUpdate(
+        { _id: profileId },
+        { $addToSet: { savedFilters: filterId } },
+        { new: true }
+      );
     },
   },
 };

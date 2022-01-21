@@ -24,9 +24,8 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     playerList: [String]
-    filter: [String]
     goldFilter: Int
-    weaponTypeFilter: String
+    weaponTypeFilter: [String]
     armorFilter: Boolean
     weaponFilter: Boolean
     inflationVariable: Int
@@ -71,6 +70,18 @@ const typeDefs = gql`
       equipmentType: String!
       description: String!
     ): Item
+
+    addFilter(
+      name: String!
+      playerList: [String]
+      goldFilter: Int
+      weaponTypeFilter: [String]
+      armorFilter: Boolean
+      weaponFilter: Boolean
+      inflationVariable: Int
+    ): DMStore
+
+    addFilterToUser(profileId: ID!, filterId: ID!): Profile
   }
 `;
 

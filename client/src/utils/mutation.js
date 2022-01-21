@@ -45,6 +45,14 @@ export const CHANGE_ROLE = gql`
   }
 `;
 
+//mutation used for adding items to their inventory
+export const ADD_INVENTORY = gql`
+  addInventory(profileId:$profileId, item:$item){
+    _id
+    inventory
+  }
+`;
+
 //mutation used for users creating their own item
 export const ADD_ITEM = gql`
   mutation addItem(
@@ -65,5 +73,19 @@ export const ADD_ITEM = gql`
       equipmentType
       description
     }
+  }
+`;
+
+//mutation used for creating a filteredStore
+export const ADD_FILTER = gql`
+  addFilter(name:$name, playerList:$playerList, goldFilter:$goldFilter, weaponTypeFilter:$weaponTypeFilter, armorFilter:$armorFilter, weaponFilter:$weaponFilter, inflationVariable:$inflationVariable){
+    _id
+    name
+    playerList
+    goldFilter
+    weaponTypeFilter
+    armorFilter
+    weaponFilter
+    inflationVariable
   }
 `;

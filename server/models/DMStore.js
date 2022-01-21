@@ -12,24 +12,23 @@ const dmStoreSchema = new Schema({
       required: false,
     },
   ],
-
-  filter: {
-    goldFilter: {
-      type: Number,
-      required: false,
-    },
-    weaponTypeFilter: {
+  goldFilter: {
+    type: Number,
+    required: false,
+  },
+  weaponTypeFilter: [
+    {
       type: String,
       required: false,
     },
-    armorFilter: {
-      type: Boolean,
-      required: false,
-    },
-    weaponFilter: {
-      type: Boolean,
-      required: false,
-    },
+  ],
+  armorFilter: {
+    type: Boolean,
+    required: false,
+  },
+  weaponFilter: {
+    type: Boolean,
+    required: false,
   },
 
   inflationVariable: {
