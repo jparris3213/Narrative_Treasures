@@ -29,8 +29,8 @@ const Home = () => {
       const { data } = await login({
         variables: { ...formState },
       });
-      console.log(data);
-      // Auth.login(data.login.token);
+      // console.log(data);
+      Auth.login(data.login.token);
     } catch (error) {
       console.error(error);
     }
