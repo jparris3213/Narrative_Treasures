@@ -45,8 +45,9 @@ const resolver = {
 
       return { token, profile };
     },
-    login: async (parent, { name, email, password }) => {
-      const profile = await Profile.findOne({ name, email });
+    login: async (parent, { email, password }) => {
+      console.log("*************", email, password);
+      const profile = await Profile.findOne({ email });
 
       if (!profile) {
         throw new AuthenticationError("No profile with that name or email!");
