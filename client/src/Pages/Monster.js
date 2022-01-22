@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { MONSTER_QUERY } from "../utils/api";
 import Loading from "../components/Loading";
 import Card from "../components/MonsterCard";
 
 const Monster = () => {
   const [monster, setMonster] = useState([]);
-  const url = window.location.pathname;
-  const search = url.split("/").pop();
+  const { id } = useParams();
 
   useEffect(() => {
-    MONSTER_QUERY(search).then(({ data }) => {
+    MONSTER_QUERY(id).then(({ data }) => {
       setMonster(data.monster);
-      console.log(monster);
     });
   }, []);
 
   return (
-    <div>
-      {monster.index === search ? <Card monster={monster} /> : <Loading />}
-    </div>
+    <div>{monster.index === id ? <Card monster={monster} /> : <Loading />}</div>
   );
 };
 
