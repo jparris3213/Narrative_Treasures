@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Card(props) {
   const { monster } = props;
@@ -10,6 +11,7 @@ function Card(props) {
   }
 
   const {
+    index,
     name,
     challenge_rating: challengeRating,
     hit_points: hitPoints,
@@ -42,6 +44,11 @@ function Card(props) {
           <p>Hit Points: {hitPoints}</p>
           <p>alignment: {alignment}</p>
           <p>size: {size}</p>
+          <p>
+            <Link className="btn" to={`/monster/${index}`}>
+              More Stats
+            </Link>
+          </p>
         </div>
       </div>
     </div>

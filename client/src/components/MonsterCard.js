@@ -20,9 +20,9 @@ function Card(props) {
     charisma,
     proficiencies,
     damage_vulnerabilities: damageVulnerabilities,
-    damage_resistances,
-    damage_immunities,
-    condition_immunities,
+    damage_resistances: damageResistances,
+    damage_immunities: damageImmunities,
+    condition_immunities: conditionImmunities,
     senses: {
       darkvision,
       passive_perception,
@@ -63,11 +63,115 @@ function Card(props) {
       {charisma ? <p>Charisma: {charisma}</p> : <></>}
       {proficiencies.map(({ proficiency, value }) => {
         return (
-          <p>
+          <p key={proficiency.name}>
             {proficiency.name} Value: {value}
           </p>
         );
       })}
+      {damageVulnerabilities[0] ? (
+        <p>
+          Damage Vulnerabilities:
+          {damageVulnerabilities.map((type) => {
+            return type;
+          })}
+        </p>
+      ) : (
+        <></>
+      )}
+      {damageResistances[0] ? (
+        <p>
+          Damage Resistances:
+          {damageResistances.map((type) => {
+            return { type };
+          })}
+        </p>
+      ) : (
+        <></>
+      )}
+      {damageImmunities[0] ? (
+        <p>
+          Damage Immunities:
+          {damageImmunities.map((type) => {
+            return type;
+          })}
+        </p>
+      ) : (
+        <></>
+      )}
+      {damageResistances[0] ? (
+        <p>
+          Damage Resistances:
+          {damageResistances.map((type) => {
+            return type;
+          })}
+        </p>
+      ) : (
+        <></>
+      )}
+      {conditionImmunities[0] ? (
+        <p>
+          Condition Immunities:
+          {conditionImmunities.map((type) => {
+            return type;
+          })}
+        </p>
+      ) : (
+        <></>
+      )}
+      <p>
+        Senses: {darkvision ? <>Dark Vistion: {darkvision}</> : <></>}
+        {passive_perception ? (
+          <>Passive Perception: {passive_perception}</>
+        ) : (
+          <></>
+        )}
+        {tremorsense ? <>Tremorsence: {tremorsense}</> : <></>}
+        {blindsight ? <>Blind Sight: {blindsight}</> : <></>}
+        {truesight ? <>Truesight: {truesight}</> : <></>}
+      </p>
+      <p>Languages: {languages}</p>
+      {special_abilities ? (
+        <>
+          <p>Special Abilities:</p>
+          {special_abilities.map(({ name, desc }) => {
+            return (
+              <p key={name}>
+                {name}: {desc}
+              </p>
+            );
+          })}
+        </>
+      ) : (
+        <></>
+      )}
+      {actions ? (
+        <>
+          <p>Actions:</p>
+          {actions.map(({ name, desc }) => {
+            return (
+              <p key={name}>
+                {name}: {desc}
+              </p>
+            );
+          })}
+        </>
+      ) : (
+        <></>
+      )}
+      {legendary_actions ? (
+        <>
+          <p>Legendary Actions:</p>
+          {legendary_actions.map(({ name, desc }) => {
+            return (
+              <p key={name}>
+                {name}: {desc}
+              </p>
+            );
+          })}
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -105,7 +105,7 @@ async function MONSTERS_QUERY() {
   return data.json();
 }
 
-async function MONSTER_QUERY(filter) {
+async function MONSTER_QUERY(monster) {
   let data = await fetch("https://www.dnd5eapi.co/graphql", {
     method: "POST",
     headers: {
@@ -113,82 +113,82 @@ async function MONSTER_QUERY(filter) {
     },
     body: JSON.stringify({
       query: `
-        query monsterQuery($filter: FilterFindOneMonsterInput){
-            monster(filter: $filter){
-              index
+      query monsterQuery($filter: FilterFindOneMonsterInput){
+        monster(filter: $filter){
+          index
+          name
+          size
+          type
+          subtype
+          alignment
+          armor_class
+          hit_points
+          hit_dice
+          forms{
+            name
+          }
+          speed{
+            walk
+            swim
+            burrow
+            fly
+            climb
+            hover
+          }
+          strength
+          dexterity
+          constitution
+          intelligence
+          wisdom
+          charisma
+          proficiencies{
+            proficiency{
               name
-              size
-              type
-              subtype
-              alignment
-              armor_class
-              hit_points
-              hit_dice
-              forms{
+            }
+            value
+          }
+          damage_vulnerabilities
+          damage_resistances
+          damage_immunities
+          condition_immunities{
+            name
+          }
+          senses{
+            darkvision
+            passive_perception
+            blindsight
+            truesight
+            tremorsense
+          }
+          languages
+          challenge_rating
+          special_abilities{
+            name
+            desc
+          }
+          actions{
+            name
+            desc
+            damage{
+              damage_dice
+              damage_type{
                 name
-              }
-              speed{
-                walk
-                swim
-                burrow
-                fly
-                climb
-                hover
-              }
-              strength
-              dexterity
-              constitution
-              intelligence
-              wisdom
-              charisma
-              proficiencies{
-                proficiency{
-                  name
-                }
-                value
-              }
-              damage_vulnerabilities
-              damage_resistances
-              damage_immunities
-              condition_immunities{
-                name
-              }
-              senses{
-                darkvision
-                passive_perception
-                blindsight
-                truesight
-                tremorsense
-              }
-              languages
-              challenge_rating
-              special_abilities{
-                name
-                desc
-              }
-              actions{
-                name
-                desc
-                damage{
-                  damage_dice
-                  damage_type{
-                    name
-                  }
-                }
-                attack_bonus
-                
-              }
-              legendary_actions{
-                name
-                desc
-                attack_bonus
               }
             }
+            attack_bonus
+            
           }
+          legendary_actions{
+            name
+            desc
+            attack_bonus
+          }
+        }
+      }
               `,
-      variable: {
+      variables: {
         filter: {
-          index: filter,
+          index: monster,
         },
       },
     }),
