@@ -3,6 +3,7 @@ import { MONSTERS_QUERY } from "../utils/api";
 import Card from "../components/MonstersCard";
 import MonsterForm from "../components/MonsterForm";
 import filterMonsters from "../utils/filterMonsters";
+import Loading from "../components/Loading";
 
 const Monsters = () => {
   const [monsters, setMonsters] = useState([]);
@@ -32,10 +33,13 @@ const Monsters = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
-          {displayMonsters.length !== 0 &&
+          {displayMonsters.length !== 0 ? (
             displayMonsters.map((monster) => {
               return <Card monster={monster} key={monster.index} />;
-            })}
+            })
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
     </div>
