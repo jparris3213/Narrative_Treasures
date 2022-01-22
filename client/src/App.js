@@ -19,6 +19,7 @@ import Inventory from "./Pages/Inventory";
 import Home from "./Pages/Home";
 import UserProfile from "./Pages/UserProfile";
 import Monsters from "./Pages/Monsters";
+import Signup from "./Pages/Signup";
 import Monster from "./Pages/Monster";
 
 // making GraphQL API endpoint
@@ -57,8 +58,8 @@ function App1() {
             <Route exact path="/market" element={<Market />} />
             <Route exact path="/inventory" element={<Inventory />} />
             <Route exact path="/monsters" element={<Monsters />} />
+            <Route exact path="/signup" element={<Signup />} />
             <Route path="/monster/:id" element={<Monster />} />
-
             <Route path="*" element={<Home />} />
           </Routes>
         </div>
