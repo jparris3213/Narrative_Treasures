@@ -38,6 +38,15 @@ const Navigation = () => {
                     Home
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    activeclassname="is-active"
+                    to="/signup"
+                  >
+                    Signup
+                  </Link>
+                </li>
 
                 <li className="nav-item">
                   <Link
