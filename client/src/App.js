@@ -18,6 +18,7 @@ import Market from "./Pages/Market";
 import Inventory from "./Pages/Inventory";
 import Home from "./Pages/Home";
 import UserProfile from "./Pages/UserProfile";
+import Monsters from "./Pages/Monsters";
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -53,6 +54,7 @@ function App1() {
           <Route exact path="/profile" element={<UserProfile />} />
           <Route exact path="/market" element={<Market />} />
           <Route exact path="/inventory" element={<Inventory />} />
+          <Route exact path="/monsters" element={<Monsters />} />
 
           <Route path="*" element={<Home />} />
         </Routes>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Card(props) {
-  const { item, sort } = props;
+  const { item } = props;
   const discStyle = { fontSize: "8px" };
 
   const [isOpen, setIsOpen] = useState(false);
