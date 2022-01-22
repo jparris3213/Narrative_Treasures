@@ -34,6 +34,7 @@ function Card(props) {
         <div className={`front-facing front-facing-${rarity}`}>
           <h1 className="abr">{name}</h1>
           <p className="title">{type}</p>
+          <span className="atomic-number">CR: {challengeRating}</span>
         </div>
         <div className={`back-facing ${rarity}`}>
           <p>{name}</p>
