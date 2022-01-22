@@ -23,7 +23,6 @@ const Home = () => {
   //submit form
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formState);
 
     try {
       const { data } = await login({
