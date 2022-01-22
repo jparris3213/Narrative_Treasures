@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/ItemCard";
 import MarketForm from "../components/MarketForm";
-import { ALL_EQUEPMENT, MONSTERS_QUERY, MONSTER_QUERY } from "../utils/api";
+import { ALL_EQUEPMENT } from "../utils/api";
 import filterItems from "../utils/filterMarket";
 
 const Market = () => {

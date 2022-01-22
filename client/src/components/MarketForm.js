@@ -14,8 +14,6 @@ function MarketForm({ updateSort }) {
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
-    console.log("armor", noArmor);
-    console.log("value", inputValue);
 
     if (inputType === "minValue") {
       setMinValue(inputValue);

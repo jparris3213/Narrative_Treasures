@@ -65,6 +65,15 @@ const Navigation = () => {
                     Profile
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    activeclassname="is-active"
+                    to="/monsters"
+                  >
+                    Monsters
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
