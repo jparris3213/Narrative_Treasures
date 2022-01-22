@@ -42,15 +42,6 @@ const Navigation = () => {
                   <Link
                     className="nav-link"
                     activeclassname="is-active"
-                    to="/Inventory"
-                  >
-                    Inventory
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    activeclassname="is-active"
                     to="/Market"
                   >
                     Market
