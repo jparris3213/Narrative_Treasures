@@ -25,15 +25,21 @@ const Market = () => {
   }
 
   return (
-    <div>
-      <MarketForm updateSort={updateSort} />
-      <div className="container text-center">
-        <h1> Welcome to Sword-Mart</h1>
-        <p>Remember: Shop Smart...Shop S-Mart</p>
-      </div>
 
-      <div className="container">
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
+    //Filter Information
+    <div>
+      <div className="container text-center">
+        <h1>Marketplace</h1>
+        <p3>Remember: Shop Smart...Shop S-Mart</p3>
+      </div>
+      <div clasName="row">
+      <div className="">
+
+      <div className="col" style={{float:"left", margin: "0"}}><MarketForm updateSort={updateSort} /></div>
+      
+
+      <div className="col" style={{margin: "0", padding: "0"}}>
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3" style={{margin: "0", padding: "0"}}>
           {displayItems.length ? (
             displayItems.map((item) => {
               return <Card item={item} key={item.index} />;
@@ -42,7 +48,7 @@ const Market = () => {
             <Loading />
           )}
         </div>
-      </div>
+      </div></div></div>
     </div>
   );
 };

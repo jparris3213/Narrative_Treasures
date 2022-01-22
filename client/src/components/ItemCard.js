@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import IconSwitch from "./Icon_Switch";
 
 function Card(props) {
   const { item } = props;
@@ -49,14 +50,20 @@ function Card(props) {
   else rarity = "artifact";
 
   return (
-    <div className="container">
+    <div className="container" style={{margin: "0px", padding: "0px"}}>
       <div
         className={isOpen ? "element-card open" : "element-card"}
         onClick={flipCard}
+        style={{margin: "0px", padding: "0px"}}
       >
         <div className={`front-facing front-facing-${rarity}`}>
-          <h1 className="abr">{name}</h1>
+          <h1 className="abr">
+            <IconSwitch item={item} key={item.index} />
+            {name}
+          </h1>
+
           <p className="title">{categoryName}</p>
+
           {quantity !== 0 && (
             <span className="atomic-number">
               {quantity}
@@ -66,17 +73,45 @@ function Card(props) {
         </div>
         {categoryName === "Weapon" && (
           <div className={`back-facing ${rarity}`}>
-            <p>Range: {weapon_range}</p>
-            {weapon_range === "Ranged" && <p>normal: {normal}</p>}
-            {weapon_range === "Ranged" && <p>long: {long}</p>}
-            <p>Damage: {damage_dice}</p>
-            <p>Damage type: {damageName}</p>
-            <p>Properties:</p>
+            <div
+              class="table-responsive"
+              style={{ fontSize: "12px", overflow: "hidden", padding: "0px" }}
+            >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Range</th>
+                    <th>Dmg</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{weapon_range}</td>
+                    <td>{damage_dice}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Weight</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{damageName}</td>
+                    <td>{weight} lbs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p>
               <a
                 className="btn"
                 href="This will add to inventory"
                 target="_blank"
+                style={{ fontSize: "12px" }}
               >
                 Add to inventory
               </a>
@@ -85,18 +120,61 @@ function Card(props) {
         )}
         {categoryName === "Armor" && (
           <div className={`back-facing ${rarity}`}>
-            <p>Armor Category: {armorCategory}</p>
-            <p>Base Armor Class: {base}</p>
-            {strMinimun === true && <p>Str Minimum: {strMinimun}</p>}
-            <p>Weight: {weight}</p>
-            <p>Properties:</p>
-            {dexBonus && <p>Dex Bonus</p>}
-            {stealthDisadvantage && <p>Stealth Disadvantage</p>}
+            <div
+              class="table-responsive"
+              style={{ fontSize: "12px", overflow: "hidden", padding: "0px" }}
+            >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>AC</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{armorCategory}</td>
+                    <td>{base}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Weight</th>
+                    <th>Min Str</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{weight} lbs</td>
+                    <td>{strMinimun}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Properties</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      {dexBonus && <p>Dex Bonus</p>}
+                      {stealthDisadvantage && <p>Stealth Disadvantage</p>}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p>
               <a
                 className="btn"
                 href="This will add to inventory"
                 target="_blank"
+                style={{ fontSize: "12px" }}
               >
                 Add to inventory
               </a>
@@ -105,13 +183,31 @@ function Card(props) {
         )}
         {categoryName === "Adventuring Gear" && (
           <div className={`back-facing ${rarity}`}>
-            <p>weight: {weight}</p>
-            <p style={discStyle}>{desc}</p>
+            <div
+              class="table-responsive"
+              style={{ fontSize: "15px", overflow: "hidden", padding: "0px" }}
+            >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Weight</th>
+                    <th>Style</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{weight} lbs</td>
+                    <td style={discStyle}>{desc}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p>
               <a
                 className="btn"
                 href="This will add to inventory"
                 target="_blank"
+                style={{ fontSize: "12px" }}
               >
                 Add to inventory
               </a>
@@ -120,13 +216,31 @@ function Card(props) {
         )}
         {categoryName === "Tools" && (
           <div className={`back-facing ${rarity}`}>
-            <p>weight: {weight}</p>
-            <p>{toolCategory}</p>
+            <div
+              class="table-responsive"
+              style={{ fontSize: "15px", overflow: "hidden", padding: "0px" }}
+            >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Weight</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{weight} lbs</td>
+                    <td>{toolCategory}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <p>
               <a
                 className="btn"
                 href="This will add to inventory"
                 target="_blank"
+                style={{ fontSize: "12px" }}
               >
                 Add to inventory
               </a>
@@ -136,12 +250,28 @@ function Card(props) {
         {categoryName === "Mounts and Vehicles" &&
           vehicleCategory === "Mounts and Other Animals" && (
             <div className={`back-facing ${rarity}`}>
+              
+            <div
+              class="table-responsive"
+              style={{ fontSize: "15px", overflow: "hidden", padding: "0px" }}
+            >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Speed</th>
+                    <th>Capacity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{speedQuantity}
+                {speedUnit}</td>
+                    <td>{capacity}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
               <p>{vehicleCategory}</p>
-              <p>
-                Speed: {speedQuantity}
-                {speedUnit}
-              </p>
-              <p>Capacity: {capacity}</p>
               <p>
                 <a
                   className="btn"
