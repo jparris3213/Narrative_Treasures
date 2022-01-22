@@ -1,16 +1,16 @@
-export default function sort(data, sort) {
+export default function filterItems(data, sort) {
   const {
     minValue,
     maxValue,
     noArmor,
-    noWeapons,
-    noMagicItems,
-    noAventuringGear,
+    noWeapon,
+    noAdventuringGear,
+    noTools,
+    noMountsVehicles,
   } = sort;
 
   return data.filter((item) => {
     const {
-      magic,
       equipment_category: { name: categoryName },
       cost: { quantity, unit },
     } = item;
@@ -24,14 +24,18 @@ export default function sort(data, sort) {
       gpCost = quantity * 0.01;
     }
 
-    if (noMagicItems && magic) {
+    if (noArmor && categoryName === "Armor") {
       return false;
-    } else if (noArmor && categoryName === "Armor") {
+    } else if (noWeapon && categoryName === "Weapon") {
       return false;
-    } else if (noWeapons && categoryName === "Weapons") {
+    } else if (noAdventuringGear && categoryName === "Adventuring Gear") {
       return false;
-    } else if (noAventuringGear && categoryName === "Adventuring Gear") {
+    } else if (noTools && categoryName === "Tools") {
       return false;
+    } else if (noMountsVehicles && categoryName === "Mounts and Vehicles") {
+      return false;
+    } else if (minValue === 0 && maxValue === 0) {
+      return true;
     } else if (gpCost && (minValue > gpCost || gpCost > maxValue)) {
       return false;
     } else {

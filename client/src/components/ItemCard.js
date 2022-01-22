@@ -11,7 +11,6 @@ function Card(props) {
   }
 
   const {
-    index,
     name,
     equipment_category: { name: categoryName },
     cost: { quantity, unit },
@@ -58,7 +57,7 @@ function Card(props) {
         <div className={`front-facing front-facing-${rarity}`}>
           <h1 className="abr">{name}</h1>
           <p className="title">{categoryName}</p>
-          {quantity && (
+          {quantity !== 0 && (
             <span className="atomic-number">
               {quantity}
               {unit}

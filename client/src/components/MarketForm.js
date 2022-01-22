@@ -4,8 +4,8 @@ function MarketForm({ updateSort }) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
   const [noArmor, setNoArmor] = useState(false);
-  const [noWeapons, setNoWeapons] = useState(false);
-  const [noAventuringGear, setNoAventuringGear] = useState(false);
+  const [noWeapon, setNoWeapon] = useState(false);
+  const [noAdventuringGear, setNoAdventuringGear] = useState(false);
   const [noTools, setNoTools] = useState(false);
   const [noMountsVehicles, setNoMountsVehicles] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -14,21 +14,23 @@ function MarketForm({ updateSort }) {
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
+    console.log("armor", noArmor);
+    console.log("value", inputValue);
 
     if (inputType === "minValue") {
       setMinValue(inputValue);
     } else if (inputType === "maxValue") {
       setMaxValue(inputValue);
     } else if (inputType === "noArmor") {
-      setNoArmor(inputValue);
-    } else if (inputType === "noWeapons") {
-      setNoWeapons(inputValue);
+      setNoArmor(noArmor ? false : true);
+    } else if (inputType === "noWeapon") {
+      setNoWeapon(noWeapon ? false : true);
     } else if (inputType === "noAventuringGear") {
-      setNoAventuringGear(inputValue);
+      setNoAdventuringGear(noAdventuringGear ? false : true);
     } else if (inputType === "noTools") {
-      setNoTools(inputValue);
+      setNoTools(noTools ? false : true);
     } else if (inputType === "noMountsVehicles") {
-      setNoMountsVehicles(inputValue);
+      setNoMountsVehicles(noMountsVehicles ? false : true);
     }
   };
 
@@ -36,19 +38,23 @@ function MarketForm({ updateSort }) {
     event.preventDefault();
     setErrorMessage("");
 
-    if (maxValue <= minValue) {
-      setErrorMessage(
-        "Please set the Maximun Gold Value as more then the Minimun Gold Value"
-      );
-      return;
+    if (minValue !== 0 && maxValue !== 0) {
+      if (maxValue <= minValue) {
+        setErrorMessage(
+          "Please set the Maximun Gold Value as more then the Minimun Gold Value"
+        );
+        return;
+      }
     }
 
     updateSort({
       minValue: minValue,
       maxValue: maxValue,
       noArmor: noArmor,
-      noWeapons: noWeapons,
-      noAventuringGear: noAventuringGear,
+      noWeapon: noWeapon,
+      noAdventuringGear: noAdventuringGear,
+      noTools: noTools,
+      noMountsVehicles: noMountsVehicles,
     });
   };
 
@@ -76,12 +82,24 @@ function MarketForm({ updateSort }) {
             onChange={handleInputChange}
           />
           <br />
-          <p>Use decimals to do a lower value.</p>
+          <p>
+            Use decimals to do a lower value.
+            <br />
+            Leave values to not filter by price.
+          </p>
         </div>
         <fieldset className="p-4">
           <legend>Exclude</legend>
           <div className="d-flex flex-row">
             <div>
+              <input
+                type="checkbox"
+                name="noWeapon"
+                value={noWeapon}
+                onChange={handleInputChange}
+              />
+              <label> Weapons</label>
+              <br />
               <input
                 type="checkbox"
                 name="noArmor"
@@ -92,16 +110,8 @@ function MarketForm({ updateSort }) {
               <br />
               <input
                 type="checkbox"
-                name="noWeapons"
-                value={noWeapons}
-                onChange={handleInputChange}
-              />
-              <label> Weapons</label>
-              <br />
-              <input
-                type="checkbox"
                 name="noAventuringGear"
-                value={noAventuringGear}
+                value={noAdventuringGear}
                 onChange={handleInputChange}
               />
               <label> Aventuring Gear</label>

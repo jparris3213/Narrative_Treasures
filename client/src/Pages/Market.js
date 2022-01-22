@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Card from "../components/ItemCard";
 import MarketForm from "../components/MarketForm";
 import { ALL_EQUEPMENT, MONSTERS_QUERY, MONSTER_QUERY } from "../utils/api";
+import filterItems from "../utils/filterMarket";
 
 const Market = () => {
   const [equipments, setEquipments] = useState([]);
+  const [displayItems, setDisplayItems] = useState([]);
   const [sort, setSort] = useState({});
 
   useEffect(() => {
@@ -12,6 +14,10 @@ const Market = () => {
       setEquipments(data.equipments);
     });
   }, []);
+
+  useEffect(() => {
+    setDisplayItems(filterItems(equipments, sort));
+  }, [equipments, sort]);
 
   function updateSort(newSort) {
     setSort(newSort);
@@ -27,8 +33,8 @@ const Market = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
-          {equipments.length !== 0 &&
-            equipments.map((item) => {
+          {displayItems.length !== 0 &&
+            displayItems.map((item) => {
               return <Card item={item} key={item.index} />;
             })}
         </div>
