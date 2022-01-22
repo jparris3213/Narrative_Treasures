@@ -89,7 +89,7 @@ async function MONSTERS_QUERY() {
     body: JSON.stringify({
       query: `
         query Monsters {
-            monsters{
+            monsters (limit:350){
               index
               name
               challenge_rating
