@@ -1,0 +1,54 @@
+h1 {
+  height: 50px;
+}
+
+.loading1 {
+  display: block;
+  width: 50px;
+  height: 50px;
+  animation: spin1 5s linear 0s infinite;
+}
+
+.loading2 {
+  width: 50px;
+  height: 50px;
+  transform: rotate(120deg);
+  animation: spin2 5s linear 0s infinite;
+}
+
+.loading3 {
+  width: 50px;
+  height: 50px;
+  transform: rotate(240deg);
+  animation: spin3 5s linear 0s infinite;
+}
+
+@keyframes spin1 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin2 {
+  from {
+    transform: rotate(120deg);
+  }
+
+  to {
+    transform: rotate(480deg);
+  }
+}
+
+@keyframes spin3 {
+  from {
+    transform: rotate(240deg);
+  }
+
+  to {
+    transform: rotate(600deg);
+  }
+}
