@@ -1,5 +1,18 @@
 import { gql } from "@apollo/client";
 
+//this logs a user in
+export const LOGIN = gql`
+  mutation login($name: String!, $email: String!, $password: String) {
+    login(name: $name, email: $email, password: $password) {
+      token
+      profile {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 //this adds a user to our database
 export const ADD_PROFILE = gql`
   mutation addProfile(
@@ -47,9 +60,11 @@ export const CHANGE_ROLE = gql`
 
 //mutation used for adding items to their inventory
 export const ADD_INVENTORY = gql`
-  addInventory(profileId:$profileId, item:$item){
-    _id
-    inventory
+  mutation addInventory($profileId: ID!, $item: String!) {
+    addInventory(profileId: $profileId, item: $item) {
+      _id
+      inventory
+    }
   }
 `;
 
@@ -78,14 +93,32 @@ export const ADD_ITEM = gql`
 
 //mutation used for creating a filteredStore
 export const ADD_FILTER = gql`
-  addFilter(name:$name, playerList:$playerList, goldFilter:$goldFilter, weaponTypeFilter:$weaponTypeFilter, armorFilter:$armorFilter, weaponFilter:$weaponFilter, inflationVariable:$inflationVariable){
-    _id
-    name
-    playerList
-    goldFilter
-    weaponTypeFilter
-    armorFilter
-    weaponFilter
-    inflationVariable
+  mutation addFilter(
+    $name: String!
+    $playerList: [String]
+    $goldFilter: Int
+    $weaponTypeFilter: [String]
+    $armorFilter: Boolean
+    $weaponFilter: Boolean
+    $inflationVariable: Int
+  ) {
+    addFilter(
+      name: $name
+      playerList: $playerList
+      goldFilter: $goldFilter
+      weaponTypeFilter: $weaponTypeFilter
+      armorFilter: $armorFilter
+      weaponFilter: $weaponFilter
+      inflationVariable: $inflationVariable
+    ) {
+      _id
+      name
+      playerList
+      goldFilter
+      weaponTypeFilter
+      armorFilter
+      weaponFilter
+      inflationVariable
+    }
   }
 `;

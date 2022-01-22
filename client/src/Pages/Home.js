@@ -1,6 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom"; //used to link the user back to the homepage or their profile upon logging in
+import { useMutation } from "@apollo/client";
+import { ADD_PROFILE } from "../utils/mutation";
+import { LOGIN } from "../utils/mutation";
+
+import Auth from "../utils/auth";
 
 const Home = () => {
+  //setting up how the form should look beforehand
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const [addProfile, { error, data }] = useMutation(ADD_PROFILE);
+
+  //this will update the form based on input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  //submit form
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formState);
+
+    try {
+      const { data } = await addProfile({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.addProfile.token);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="container text-center" cz-shortcut-listen="true">
       <main className="form-signin d-flex justify-content-center mb-3">
