@@ -34,7 +34,7 @@ const Market = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
-          {displayItems.length !== 0 ? (
+          {displayItems.length ? (
             displayItems.map((item) => {
               return <Card item={item} key={item.index} />;
             })

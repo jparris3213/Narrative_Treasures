@@ -33,7 +33,7 @@ const Monsters = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
-          {displayMonsters.length !== 0 ? (
+          {displayMonsters.length ? (
             displayMonsters.map((monster) => {
               return <Card monster={monster} key={monster.index} />;
             })
