@@ -40,34 +40,143 @@ function Card(props) {
   return (
     <div className="d-flex flex-column align-items-center">
       <h1>{name}</h1>
-      <p>Challenge Rating: {challengeRating}</p>
-      <p>Size: {size}</p>
-      <p>Type: {type}</p>
-      <p>Subtypes: {subtype}</p>
-      <p>Alignment: {alignment}</p>
-      <p>Armor Class: {armorClass}</p>
-      <p>Hit Points: {hitPoints}</p>
-      <p>Hit Dice: {hitDice}</p>
-      <p>Speed:</p>
-      {walk ? <p>Walk: {walk}</p> : <></>}
-      {swim ? <p>Swim: {swim}</p> : <></>}
-      {burrow ? <p>Burrow: {burrow}</p> : <></>}
-      {fly ? <p>Fly: {fly}</p> : <></>}
-      {climb ? <p>Climb: {climb}</p> : <></>}
-      {hover ? <p>Hover: {hover}</p> : <></>}
-      {strength ? <p>Strength: {strength}</p> : <></>}
-      {dexterity ? <p>Dexterity: {dexterity}</p> : <></>}
-      {constitution ? <p>Constitution: {constitution}</p> : <></>}
-      {intelligence ? <p>Intelligence: {intelligence}</p> : <></>}
-      {wisdom ? <p>Wisdom: {wisdom}</p> : <></>}
-      {charisma ? <p>Charisma: {charisma}</p> : <></>}
-      {proficiencies.map(({ proficiency, value }) => {
-        return (
-          <p key={proficiency.name}>
-            {proficiency.name} Value: {value}
-          </p>
-        );
-      })}
+      <div className="container">
+        <div className="row">
+          <table class="table ">
+            <thead class="thead-dark">
+              <tr>
+                <th>CR</th>
+                <th>Size</th>
+                <th>Type</th>
+                <th>Hit Dice</th>
+                <th>Alignment</th>
+                <th>AC</th>
+                <th>HP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{challengeRating}</td>
+                <td>{size}</td>
+                <td>
+                  {type}:{subtype}
+                </td>
+                <td>{hitDice}</td>
+                <td>{alignment}</td>
+                <td>{armorClass}</td>
+                <td>{hitPoints}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="container d-inline-flex">
+        <div className="row d-inline-flex" style={{ width: "200px" }}>
+          <table class="table">
+            <thead class="thead-dark">
+              <h2>Speed</h2>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Walk:</th>
+                {walk ? <td> {walk}</td> : <></>}
+              </tr>
+              <tr>
+                <th scope="row">Swim:</th>
+                {swim ? <td> {swim}</td> : <td>n/a</td>}
+              </tr>
+
+              <tr>
+                <th scope="row">Burrow:</th>
+                {burrow ? <td> {burrow}</td> : <td>n/a</td>}
+              </tr>
+
+              <tr>
+                <th scope="row">Fly:</th>
+                {fly ? <td> {fly}</td> : <td>n/a</td>}
+              </tr>
+
+              <tr>
+                <th scope="row">Climb:</th>
+                {climb ? <td> {climb}</td> : <td>n/a</td>}
+              </tr>
+
+              <tr>
+                <th scope="row">Hover:</th>
+                {hover ? <td> {hover}</td> : <td>n/a</td>}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="container" style={{ width: "200px" }}>
+          <div className="row flex">
+            <table class="table">
+              <thead class="thead-dark">
+                <h2>Base Stats</h2>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Str:</th>
+                  {strength ? <td> {strength}</td> : <></>}
+                </tr>
+                <tr>
+                  <th scope="row">Dex:</th>
+                  {dexterity ? <td> {dexterity}</td> : <></>}
+                </tr>
+
+                <tr>
+                  <th scope="row">Con:</th>
+                  {constitution ? <td> {constitution}</td> : <></>}
+                </tr>
+
+                <tr>
+                  <th scope="row">Int:</th>
+                  {intelligence ? <td> {intelligence}</td> : <></>}
+                </tr>
+
+                <tr>
+                  <th scope="row">Wis:</th>
+                  {wisdom ? <td> {wisdom}</td> : <></>}
+                </tr>
+
+                <tr>
+                  <th scope="row">Cha:</th>
+                  {charisma ? <td> {charisma}</td> : <></>}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="container" style={{ width: "300px" }}>
+          <div className="row flex">
+            <table class="table">
+              <thead class="thead-dark">
+                <h2>Skills</h2>
+                <tr>
+                  <th>Value</th>
+                  <th>Skill</th>
+                </tr>
+              </thead>
+              <tbody>
+                {proficiencies.map(({ proficiency, value }) => {
+                  return (
+                    <tr key={proficiency.name}>
+                      <td>{value}</td>
+                      {proficiency.name}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+
       {damageVulnerabilities[0] ? (
         <p>
           Damage Vulnerabilities:

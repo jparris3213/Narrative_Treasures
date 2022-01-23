@@ -58,7 +58,8 @@ function MarketForm({ updateSort }) {
 
   return (
     <form className="d-flex flex-column">
-      <div className="d-flex p-2 bd-highlight flex-row justify-content-center">
+
+      <div className="d-flex p-1 bd-highlight flex-row justify-content-center">
         <div className="p-4">
           <label>Minimum Gold Value:</label>
           <br />
