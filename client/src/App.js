@@ -21,6 +21,7 @@ import UserProfile from "./Pages/UserProfile";
 import Monsters from "./Pages/Monsters";
 import Signup from "./Pages/Signup";
 import Monster from "./Pages/Monster";
+import Splash from "./Pages/Splash";
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -61,6 +62,7 @@ function App1() {
             <Route exact path="/signup" element={<Signup />} />
             <Route path="/monster/:id" element={<Monster />} />
             <Route path="*" element={<Home />} />
+            <Route exact path="/splash" element={<Splash />} />
           </Routes>
         </div>
       </Router>
