@@ -8,14 +8,12 @@ import {
 } from "../utils/api";
 
 const UserProfile = () => {
-
   const [equipments, setEquipments] = useState([]);
   useEffect(() => {
     ALL_EQUEPMENT().then(({ data }) => {
       setEquipments(data.equipments);
     });
   }, []);
-
 
   return (
     <div>
@@ -26,8 +24,6 @@ const UserProfile = () => {
       <div>
         <ul>
           <li>Name</li>
-          <li>Email</li>
-
           <li>Current Gold: </li>
           <li>Sold</li>
         </ul>
@@ -50,14 +46,15 @@ const UserProfile = () => {
                   </tr>
                 </thead>
                 <tbody>
-                    {equipments.length &&
-                      equipments.map((equipment) => {
-                        return <Item equipment={equipment} key={equipment.index} />;
-                      })}
+                  {equipments.length &&
+                    equipments.map((equipment) => {
+                      return (
+                        <Item equipment={equipment} key={equipment.index} />
+                      );
+                    })}
                 </tbody>
               </table>
             </div>
-            
           </div>
         </div>
       </div>
