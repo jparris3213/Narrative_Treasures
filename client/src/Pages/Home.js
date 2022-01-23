@@ -47,7 +47,7 @@ const Home = () => {
         {data ? (
           <p>
             Success! You can now head{" "}
-            <Link to="/profile">to the profile page.</Link>
+            <Link to={`/profile/${profile._id}`}>to the profile page.</Link>
           </p>
         ) : (
           <form onSubmit={handleFormSubmit}>
