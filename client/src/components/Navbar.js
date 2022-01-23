@@ -5,11 +5,8 @@ import { Link } from "react-router-dom";
 const Navigation = () => {
   //const [isOpen, setOpen] = useState(false);
   return (
-    <header className="bd-header py-3 d-flex align-items-stretch border-bottom border-dark">
-      <div className="container-fluid d-flex align-items-center">
-        <h1 className="d-flex align-items-center fs-4 text-white mb-0">
-          Narrative Treasures
-        </h1>
+    <header className="bd-header py-3 d-flex align-items-stretch">
+      <div className="container-fluid d-flex justify-content-center">
         <nav
           className="navbar navbar-expand-sm navbar-dark"
           aria-label="Third navbar example"
@@ -26,18 +23,8 @@ const Navigation = () => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-
             <div className="collapse navbar-collapse" id="navbarsExample03">
               <ul className="navbar-nav me-auto mb-2 mb-sm-0">
-                <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    activeclassname="is-active"
-                    to="/Home"
-                  >
-                    Home
-                  </Link>
-                </li>
                 <li className="nav-item">
                   <Link
                     className="nav-link"
@@ -47,7 +34,6 @@ const Navigation = () => {
                     Signup
                   </Link>
                 </li>
-
                 <li className="nav-item">
                   <Link
                     className="nav-link"
@@ -55,6 +41,21 @@ const Navigation = () => {
                     to="/Market"
                   >
                     Market
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    activeclassname="is-active"
+                    to="/Home"
+                  >
+                    <img
+                      className="logo"
+                      src={require("../images/new-nt-site-logo-2.png")}
+                      alt=""
+                      width="200"
+                      height="125"
+                    />
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -79,13 +80,6 @@ const Navigation = () => {
             </div>
           </div>
         </nav>
-        <img
-          className="bg-light rounded-circle"
-          src="https://www.freeiconspng.com/thumbs/dragon-png/dragon-png-20.png"
-          alt=""
-          width="75"
-          height="75"
-        />
       </div>
     </header>
   );
