@@ -176,6 +176,16 @@
   background-color: rgb(98, 20, 0);
 }
 
+.btn-2 {
+  background-color: rgb(98, 20, 0);
+  margin: 3rem;
+}
+
+.splash-text {
+  font-size: x-large;
+  margin: 3rem;
+}
+
 .nav-item {
   font-size: large;
 }
