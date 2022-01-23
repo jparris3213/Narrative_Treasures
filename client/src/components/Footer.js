@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer mt-auto py-3">
+    <footer className="footer mt-auto py-1">
       <div className="container text-center">
         <span className="mt-5 mb-3 text-light">
           <img
