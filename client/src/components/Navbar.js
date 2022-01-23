@@ -96,7 +96,7 @@ const Navigation = () => {
                   <Link
                     className="nav-link"
                     activeclassname="is-active"
-                    to={`/profile/${profileId}`}
+                    to={`/profile/${profile._id}`}
                   >
                     Profile
                   </Link>
