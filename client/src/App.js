@@ -54,7 +54,7 @@ function App1() {
         <div style={{ marginBottom: "10rem" }}>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/profile" element={<UserProfile />} />
+            <Route exact path="/profile/:id" element={<UserProfile />} />
             <Route exact path="/market" element={<Market />} />
             <Route exact path="/inventory" element={<Inventory />} />
             <Route exact path="/monsters" element={<Monsters />} />

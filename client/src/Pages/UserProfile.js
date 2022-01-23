@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Item from "../components/LineItem";
-import { Redirect, useParams} from "react-router-domg"
+import { Navigate, useParams} from "react-router-dom"
 import {
   MAGIC_ITEMS,
   ALL_EQUEPMENT,
@@ -25,13 +25,6 @@ const UserProfile = () => {
     });
   }, []);
 
-  const [user, setUser] = useState([]);
-  useEffect(() => {
-    QUERY_GET_USER().then(({data}) => {
-      setUser(data.user);
-    });
-  }, []);
-
   const {loading, data} = useQuery(
     profileId ? QUERY_GET_USER : QUERY_ME,
     {
@@ -39,23 +32,36 @@ const UserProfile = () => {
     }
   )
 
+  const profile = data?.me || data?.profile || {};
+
+  if( Auth.loggedIn() && Auth.getProfile().data._id === profileId ) {
+    return < Navigate to = "/me" />;
+  }
+
+  if( loading ) {
+    return(
+      <div>Loading...</div>
+    );
+  }
+
+  if( !profile?.name) {
+    return(
+      <h1>Log in Sucka!</h1>
+    )
+  }
+
+
   return (
     <div>
       <div>
         <h1>Your User Profile </h1>
       </div>
-      <div> Current Gold On Hand: 124 </div>
+      <div> Current Gold On Hand:  </div>
       <div>
         <ul>
-          {user.length &&
-          user.map((user) => {
-            return (
-              <li>${user.name}</li>
-            )
-          })}
-          <li>Name:</li>
-          <li>Current Gold: </li>
-          <li>Sold</li>
+          <li>Name: {profile.name}</li>
+          <li>Current Gold: {profile.gold}</li>
+          <li>Are you a Dungeon Master?</li>
         </ul>
       </div>
       <div>

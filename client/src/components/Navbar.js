@@ -1,9 +1,43 @@
 //import React from "react";
 import React from "react";
 import { Link } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { QUERY_GET_USER, QUERY_ME } from "../utils/queries";
+import Auth from "../utils/auth";
+import { useQuery, useSubscription } from "@apollo/client";
 
 const Navigation = () => {
   //const [isOpen, setOpen] = useState(false);
+
+  const { profileId } = useParams();
+
+  
+  const {loading, data} = useQuery(
+    profileId ? QUERY_GET_USER : QUERY_ME,
+    {
+      variables: { profileId: profileId},
+    }
+  )
+
+  const profile = data?.me || data?.profile || {};
+
+  if( Auth.loggedIn() && Auth.getProfile().data._id === profileId ) {
+    return < Navigate to = "/me" />;
+  }
+
+  if( loading ) {
+    return(
+      <div>Loading...</div>
+    );
+  }
+
+  if( !profile?.name) {
+    return(
+      <h1>Log in Sucka!</h1>
+    )
+  }
+
+
   return (
     <header className="bd-header py-3 d-flex align-items-stretch">
       <div className="container-fluid d-flex justify-content-center">
@@ -62,7 +96,7 @@ const Navigation = () => {
                   <Link
                     className="nav-link"
                     activeclassname="is-active"
-                    to="/profile"
+                    to={`/profile/${profileId}`}
                   >
                     Profile
                   </Link>
