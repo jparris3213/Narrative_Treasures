@@ -1,19 +1,43 @@
 import React, { useEffect, useState } from "react";
 import Item from "../components/LineItem";
+import { Redirect, useParams} from "react-router-domg"
 import {
   MAGIC_ITEMS,
   ALL_EQUEPMENT,
   MONSTERS_QUERY,
   MONSTER_QUERY,
 } from "../utils/api";
+import { QUERY_GET_USER, QUERY_ME} from "../utils/queries";
+
+import Auth from "../utils/auth";
+import { useQuery, useSubscription } from "@apollo/client";
+
+
 
 const UserProfile = () => {
+  
+  const { profileId } = useParams();
+
   const [equipments, setEquipments] = useState([]);
   useEffect(() => {
     ALL_EQUEPMENT().then(({ data }) => {
       setEquipments(data.equipments);
     });
   }, []);
+
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    QUERY_GET_USER().then(({data}) => {
+      setUser(data.user);
+    });
+  }, []);
+
+  const {loading, data} = useQuery(
+    profileId ? QUERY_GET_USER : QUERY_ME,
+    {
+      variables: { profileId: profileId},
+    }
+  )
 
   return (
     <div>
@@ -23,7 +47,13 @@ const UserProfile = () => {
       <div> Current Gold On Hand: 124 </div>
       <div>
         <ul>
-          <li>Name</li>
+          {user.length &&
+          user.map((user) => {
+            return (
+              <li>${user.name}</li>
+            )
+          })}
+          <li>Name:</li>
           <li>Current Gold: </li>
           <li>Sold</li>
         </ul>
