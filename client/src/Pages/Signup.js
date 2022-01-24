@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
 import { ADD_PROFILE } from "../utils/mutation";
+import { Navigate, useParams } from "react-router-dom";
 
 import Auth from "../utils/auth";
 
@@ -56,7 +57,7 @@ const Signup = () => {
         {data ? (
           <p>
             Success! You can now head{" "}
-            <Link to="/profile">to your homepage.</Link>
+            <Navigate to={`/profile/${data.login.profile._id}`}></Navigate>
           </p>
         ) : (
           <form onSubmit={handleFormSubmit}>

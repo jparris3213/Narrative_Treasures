@@ -46,7 +46,6 @@ const resolver = {
       return { token, profile };
     },
     login: async (parent, { email, password }) => {
-      console.log("*************", email, password);
       const profile = await Profile.findOne({ email });
 
       if (!profile) {

@@ -8,7 +8,7 @@ import Auth from "../utils/auth";
 const Home = () => {
   //setting up our form
   const [formState, setFormState] = useState({ email: "", password: "" });
-  const [login, { error, data }] = useMutation(LOGIN);
+  const [login, { error, data }] = useMutation(LOGIN); //data has all the info we need to get user info including their _id!!!
 
   //used to update form based on input changes
   const handleChange = (e) => {
@@ -23,7 +23,6 @@ const Home = () => {
   //submit form
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formState);
 
     try {
       const { data } = await login({
@@ -46,7 +45,7 @@ const Home = () => {
     <div className="container text-center" cz-shortcut-listen="true">
       <main className="form-signin d-flex justify-content-center mb-3">
         {data ? (
-          < Navigate to = "/profile" />
+          <Navigate to={`/profile/${data.login.profile._id}`}></Navigate>
         ) : (
           <form onSubmit={handleFormSubmit}>
             <img
