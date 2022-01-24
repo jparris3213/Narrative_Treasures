@@ -42,8 +42,8 @@ function Card(props) {
       <h1>{name}</h1>
       <div className="container">
         <div className="row">
-          <table class="table ">
-            <thead class="thead-dark">
+          <table className="table ">
+            <thead className="thead-dark">
               <tr>
                 <th>CR</th>
                 <th>Size</th>
@@ -71,89 +71,89 @@ function Card(props) {
         </div>
       </div>
 
-      <div className="container d-inline-flex">
+      <div className="container d-inline-flex justify-content-around">
         <div className="row d-inline-flex" style={{ width: "200px" }}>
-          <table class="table">
-            <thead class="thead-dark">
+          <table className="table">
+            <thead className="thead-dark">
               <h2>Speed</h2>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">Walk:</th>
-                {walk ? <td> {walk}</td> : <></>}
+                {walk ? <td>{walk}</td> : <></>}
               </tr>
               <tr>
                 <th scope="row">Swim:</th>
-                {swim ? <td> {swim}</td> : <td>n/a</td>}
+                {swim ? <td>{swim}</td> : <td>n/a</td>}
               </tr>
 
               <tr>
                 <th scope="row">Burrow:</th>
-                {burrow ? <td> {burrow}</td> : <td>n/a</td>}
+                {burrow ? <td>{burrow}</td> : <td>n/a</td>}
               </tr>
 
               <tr>
                 <th scope="row">Fly:</th>
-                {fly ? <td> {fly}</td> : <td>n/a</td>}
+                {fly ? <td>{fly}</td> : <td>n/a</td>}
               </tr>
 
               <tr>
                 <th scope="row">Climb:</th>
-                {climb ? <td> {climb}</td> : <td>n/a</td>}
+                {climb ? <td>{climb}</td> : <td>n/a</td>}
               </tr>
 
               <tr>
                 <th scope="row">Hover:</th>
-                {hover ? <td> {hover}</td> : <td>n/a</td>}
+                {hover ? <td>{hover}</td> : <td>n/a</td>}
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div className="container" style={{ width: "200px" }}>
+        <div className="d-inline-flex" style={{ width: "200px" }}>
           <div className="row flex">
-            <table class="table">
-              <thead class="thead-dark">
+            <table className="table">
+              <thead className="thead-dark">
                 <h2>Base Stats</h2>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">Str:</th>
-                  {strength ? <td> {strength}</td> : <></>}
+                  {strength ? <td>{strength}</td> : <></>}
                 </tr>
                 <tr>
                   <th scope="row">Dex:</th>
-                  {dexterity ? <td> {dexterity}</td> : <></>}
+                  {dexterity ? <td>{dexterity}</td> : <></>}
                 </tr>
 
                 <tr>
                   <th scope="row">Con:</th>
-                  {constitution ? <td> {constitution}</td> : <></>}
+                  {constitution ? <td>{constitution}</td> : <></>}
                 </tr>
 
                 <tr>
                   <th scope="row">Int:</th>
-                  {intelligence ? <td> {intelligence}</td> : <></>}
+                  {intelligence ? <td>{intelligence}</td> : <></>}
                 </tr>
 
                 <tr>
                   <th scope="row">Wis:</th>
-                  {wisdom ? <td> {wisdom}</td> : <></>}
+                  {wisdom ? <td>{wisdom}</td> : <></>}
                 </tr>
 
                 <tr>
                   <th scope="row">Cha:</th>
-                  {charisma ? <td> {charisma}</td> : <></>}
+                  {charisma ? <td>{charisma}</td> : <></>}
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <div className="container" style={{ width: "300px" }}>
+        <div className="d-inline-flex" style={{ width: "200px" }}>
           <div className="row flex">
-            <table class="table">
-              <thead class="thead-dark">
+            <table className="table">
+              <thead className="thead-dark">
                 <h2>Skills</h2>
                 <tr>
                   <th>Value</th>
@@ -173,114 +173,252 @@ function Card(props) {
             </table>
           </div>
         </div>
-
-
       </div>
 
-      {damageVulnerabilities[0] ? (
-        <p>
-          Damage Vulnerabilities:
-          {damageVulnerabilities.map((type) => {
-            return type;
-          })}
-        </p>
-      ) : (
-        <></>
-      )}
-      {damageResistances[0] ? (
-        <p>
-          Damage Resistances:
-          {damageResistances.map((type) => {
-            return { type };
-          })}
-        </p>
-      ) : (
-        <></>
-      )}
-      {damageImmunities[0] ? (
-        <p>
-          Damage Immunities:
-          {damageImmunities.map((type) => {
-            return type;
-          })}
-        </p>
-      ) : (
-        <></>
-      )}
-      {damageResistances[0] ? (
-        <p>
-          Damage Resistances:
-          {damageResistances.map((type) => {
-            return type;
-          })}
-        </p>
-      ) : (
-        <></>
-      )}
-      {conditionImmunities[0] ? (
-        <p>
-          Condition Immunities:
-          {conditionImmunities.map((type) => {
-            return type;
-          })}
-        </p>
-      ) : (
-        <></>
-      )}
-      <p>
-        Senses: {darkvision ? <>Dark Vistion: {darkvision}</> : <></>}
-        {passive_perception ? (
-          <>Passive Perception: {passive_perception}</>
+      <div className="container d-inline-flex justify-content-around">
+        <div className="container row d-inline-flex" style={{ width: "300px" }}>
+          <div className="row flex">
+            <table className="table">
+              <thead className="thead-dark">
+                <h2>Senses:</h2>
+              </thead>
+              <tbody>
+                {darkvision ? (
+                  <tr>
+                    <th scope="row">Dark Vision:</th>
+                    <td>{darkvision}</td>
+                  </tr>
+                ) : (
+                  <></>
+                )}
+                {passive_perception ? (
+                  <tr>
+                    <th scope="row">Passive Perception:</th>
+                    <td>{passive_perception}</td>
+                  </tr>
+                ) : (
+                  <></>
+                )}
+                {tremorsense ? (
+                  <tr>
+                    <th scope="row">Tremorsense:</th>
+                    <td>{tremorsense}</td>
+                  </tr>
+                ) : (
+                  <></>
+                )}
+                {blindsight ? (
+                  <tr>
+                    <th scope="row">Blindsight:</th>
+                    <td>{blindsight}</td>
+                  </tr>
+                ) : (
+                  <></>
+                )}
+                {truesight ? (
+                  <tr>
+                    <th scope="row">Truesight:</th>
+                    <td>{truesight}</td>
+                  </tr>
+                ) : (
+                  <></>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="container row d-inline-flex" style={{ width: "300px" }}>
+          <div className="row flex">
+            <table className="table">
+              <thead className="thead-dark">
+                <h2>Languages:</h2>
+              </thead>
+              <tbody>
+                {languages.split(", ").map((language) => {
+                  return (
+                    <tr key={language}>
+                      <th>{language}</th>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="container d-inline-flex justify-content-around">
+        <div className="row d-inline-flex" style={{ width: "300px" }}>
+          <div className="row flex">
+            <table className="table">
+              <thead className="thead-dark">
+                <h2>
+                  Damage <br />
+                  Vulnerablilities:
+                </h2>
+              </thead>
+              <tbody>
+                {damageVulnerabilities[0] ? (
+                  damageVulnerabilities.map((type) => {
+                    return <tr key={type}>{type}</tr>;
+                  })
+                ) : (
+                  <tr>N/A</tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="container row d-inline-flex" style={{ width: "300px" }}>
+          <div className="row flex">
+            <table className="table">
+              <thead className="thead-dark">
+                <h2>
+                  Damage <br />
+                  Resistances:
+                </h2>
+              </thead>
+              <tbody>
+                {damageResistances[0] ? (
+                  damageResistances.map((type) => {
+                    return <tr key={type}>{type}</tr>;
+                  })
+                ) : (
+                  <tr>N/A</tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="container row d-inline-flex" style={{ width: "300px" }}>
+          <div className="row flex">
+            <table className="table">
+              <thead className="thead-dark">
+                <h2>
+                  Damage <br />
+                  Immunities:
+                </h2>
+              </thead>
+              <tbody>
+                {damageImmunities[0] ? (
+                  damageImmunities.map((type) => {
+                    return <tr key={type}>{type}</tr>;
+                  })
+                ) : (
+                  <tr>N/A</tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="container row d-inline-flex" style={{ width: "300px" }}>
+          <div className="row flex">
+            <table className="table">
+              <thead className="thead-dark">
+                <h2>
+                  Condition <br />
+                  Immunities:
+                </h2>
+              </thead>
+              <tbody>
+                {conditionImmunities[0] ? (
+                  conditionImmunities.map((type) => {
+                    return <tr key={type}>{type}</tr>;
+                  })
+                ) : (
+                  <tr>N/A</tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="container d-inline-flex justify-content-around">
+        {actions ? (
+          <div
+            className="container row d-inline-flex"
+            style={{ width: "80vw" }}
+          >
+            <div className="row flex">
+              <table className="table">
+                <thead className="thead-dark">
+                  <h2>Actions:</h2>
+                </thead>
+                <tbody>
+                  {actions.map(({ name, desc }) => {
+                    return (
+                      <tr key={name}>
+                        <th>{name}</th>
+                        <td>{desc}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         ) : (
           <></>
         )}
-        {tremorsense ? <>Tremorsence: {tremorsense}</> : <></>}
-        {blindsight ? <>Blind Sight: {blindsight}</> : <></>}
-        {truesight ? <>Truesight: {truesight}</> : <></>}
-      </p>
-      <p>Languages: {languages}</p>
-      {special_abilities ? (
-        <>
-          <p>Special Abilities:</p>
-          {special_abilities.map(({ name, desc }) => {
-            return (
-              <p key={name}>
-                {name}: {desc}
-              </p>
-            );
-          })}
-        </>
-      ) : (
-        <></>
-      )}
-      {actions ? (
-        <>
-          <p>Actions:</p>
-          {actions.map(({ name, desc }) => {
-            return (
-              <p key={name}>
-                {name}: {desc}
-              </p>
-            );
-          })}
-        </>
-      ) : (
-        <></>
-      )}
-      {legendary_actions ? (
-        <>
-          <p>Legendary Actions:</p>
-          {legendary_actions.map(({ name, desc }) => {
-            return (
-              <p key={name}>
-                {name}: {desc}
-              </p>
-            );
-          })}
-        </>
-      ) : (
-        <></>
-      )}
+      </div>
+
+      <div className="container d-inline-flex justify-content-around">
+        {special_abilities ? (
+          <div
+            className="container row d-inline-flex"
+            style={{ width: "40vw" }}
+          >
+            <div className="row flex">
+              <table className="table">
+                <thead className="thead-dark">
+                  <h2>Special Abilities:</h2>
+                </thead>
+                <tbody>
+                  {special_abilities.map(({ name, desc }) => {
+                    return (
+                      <tr key={name}>
+                        <th>{name}</th>
+                        <td>{desc}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+        {legendary_actions ? (
+          <div
+            className="container row d-inline-flex"
+            style={{ width: "40vw" }}
+          >
+            <div className="row flex">
+              <table className="table">
+                <thead className="thead-dark">
+                  <h2>Legendary Actions:</h2>
+                </thead>
+                <tbody>
+                  {legendary_actions.map(({ name, desc }) => {
+                    return (
+                      <tr key={name}>
+                        <th>{name}</th>
+                        <td>{desc}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }
