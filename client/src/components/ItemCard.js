@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import IconSwitch from "./Icon_Switch";
-import { useMutation } from "@apollo/client";
-import { ADD_INVENTORY } from "../utils/mutation";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADD_INVENTORY, CHANGE_GOLD } from "../utils/mutation";
+import { QUERY_ME } from "../utils/queries";
 import AuthService from "../utils/auth";
 
 function Card(props) {
@@ -10,7 +11,9 @@ function Card(props) {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [addInventory, { error, data }] = useMutation(ADD_INVENTORY);
+  const [addInventory] = useMutation(ADD_INVENTORY);
+  const [updateGold] = useMutation(CHANGE_GOLD);
+  const userGold = useQuery(QUERY_ME).data.me.gold;
 
   function flipCard(event) {
     setIsOpen(!isOpen);
@@ -65,15 +68,25 @@ function Card(props) {
   );
 
   const onClick = async (event) => {
-    try {
-      const { data } = await addInventory({
-        variables: {
-          profileId: AuthService.getProfile().data._id,
-          item: index,
-        },
-      });
-    } catch (e) {
-      console.error(e);
+    if (userGold >= finalCost) {
+      try {
+        await addInventory({
+          variables: {
+            profileId: AuthService.getProfile().data._id,
+            item: index,
+          },
+        });
+        await updateGold({
+          variables: {
+            profileId: AuthService.getProfile().data._id,
+            goldSet: userGold - finalCost,
+          },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      alert("You dont have enough money!!!");
     }
   };
 
@@ -110,6 +123,8 @@ function Card(props) {
                 <thead>
                   <tr>
                     <th>Range</th>
+                    {normal ? <th>normal:{normal}</th> : <></>}
+                    {long ? <th>long: {long}</th> : <></>}
                     <th>Dmg</th>
                   </tr>
                 </thead>
