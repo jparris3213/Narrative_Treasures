@@ -46,7 +46,7 @@ const Home = () => {
     <div className="container text-center" cz-shortcut-listen="true">
       <main className="form-signin d-flex justify-content-center mb-3">
         {data ? (
-          < Navigate to = "/profile" />
+          < Navigate to = {`/profile/${profile._id}`} />
         ) : (
           <form onSubmit={handleFormSubmit}>
             <img

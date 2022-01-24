@@ -23,6 +23,7 @@ import Monsters from "./Pages/Monsters";
 import Signup from "./Pages/Signup";
 import Monster from "./Pages/Monster";
 import Splash from "./Pages/Splash";
+import Login from "./Pages/Login"
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -56,7 +57,8 @@ function App1() {
         <div style={{ marginBottom: "10rem" }}>
           <Routes>
             <Route exact path="/" element={<Splash />} />
-            <Route exact path="/login" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/home/:id" element={<UserProfile />} />
             <Route exact path="/profile/:id" element={<UserProfile />} />
             <Route exact path="/market" element={<Market />} />
             <Route exact path="/inventory" element={<Inventory />} />
