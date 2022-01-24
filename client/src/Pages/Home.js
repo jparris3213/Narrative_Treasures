@@ -3,12 +3,14 @@ import { Link } from "react-router-dom"; //used to link the user back to the hom
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../utils/mutation";
 
+import { Navigate, useParams } from "react-router-dom";
+
 import Auth from "../utils/auth";
 
 const Home = () => {
   //setting up our form
   const [formState, setFormState] = useState({ email: "", password: "" });
-  const [login, { error, data }] = useMutation(LOGIN);
+  const [login, { error, data }] = useMutation(LOGIN); //data has all the info we need to get user info including their _id!!!
 
   //used to update form based on input changes
   const handleChange = (e) => {
@@ -45,10 +47,11 @@ const Home = () => {
     <div className="container text-center" cz-shortcut-listen="true">
       <main className="form-signin d-flex justify-content-center mb-3">
         {data ? (
-          <p>
-            Success! You can now head{" "}
-            <Link to={`/profile/${profile._id}`}>to the profile page.</Link>
-          </p>
+          // <p>
+          //   Success! You can now head{" "}
+          //   <Link to={`/profile/${profile._id}`}>to the profile page.</Link>
+          // </p>
+          <Navigate to={`/profile/${data.login.profile._id}`}></Navigate>
         ) : (
           <form onSubmit={handleFormSubmit}>
             <img
