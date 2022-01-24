@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_PROFILE } from "../utils/mutation";
 
+import { Navigate, useParams } from "react-router-dom";
+import { QUERY_GET_USER, QUERY_ME } from "../utils/queries";
+
 import Auth from "../utils/auth";
 
 const Signup = () => {
@@ -50,13 +53,25 @@ const Signup = () => {
     }
   };
 
+  const { profileId } = useParams();
+
+  const { loading, data2 } = useQuery(profileId ? QUERY_GET_USER : QUERY_ME, {
+    variables: { profileId: profileId },
+  });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  const profile = data?.me || data?.profile || {};
+
   return (
     <div className="container text-center" cz-shortcut-listen="true">
       <main className="form-signin d-flex justify-content-center mb-3">
         {data ? (
           <p>
             Success! You can now head{" "}
-            <Link to="/profile">to your homepage.</Link>
+            <Link to={`/profile/${profile._id}`}>to your homepage.</Link>
           </p>
         ) : (
           <form onSubmit={handleFormSubmit}>
