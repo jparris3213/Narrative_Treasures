@@ -8,6 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {useEffect, useState} from "react"
 
 // importing components
 import Footer from "./components/Footer";
@@ -22,6 +23,7 @@ import Monsters from "./Pages/Monsters";
 import Signup from "./Pages/Signup";
 import Monster from "./Pages/Monster";
 import Splash from "./Pages/Splash";
+import Login from "./Pages/Login"
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -54,15 +56,16 @@ function App1() {
         <Navbar />
         <div style={{ marginBottom: "10rem" }}>
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Splash />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/home/:id" element={<UserProfile />} />
             <Route exact path="/profile/:id" element={<UserProfile />} />
             <Route exact path="/market" element={<Market />} />
             <Route exact path="/inventory" element={<Inventory />} />
             <Route exact path="/monsters" element={<Monsters />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route path="/monster/:id" element={<Monster />} />
-            <Route path="*" element={<Home />} />
-            <Route exact path="/splash" element={<Splash />} />
+            <Route path="*" element={<Splash />} />
           </Routes>
         </div>
       </Router>
