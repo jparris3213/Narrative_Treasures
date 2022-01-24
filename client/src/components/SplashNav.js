@@ -1,43 +1,10 @@
+// for create shop: option to bring in D&D API information
 //import React from "react";
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navigate, useParams } from "react-router-dom";
-import { QUERY_GET_USER, QUERY_ME } from "../utils/queries";
-import Auth from "../utils/auth";
-import { useQuery, useSubscription } from "@apollo/client";
 
-const Navigation = () => {
+const SplashNav = () => {
   //const [isOpen, setOpen] = useState(false);
-
-  const { profileId } = useParams();
-
-  
-  const {loading, data} = useQuery(
-    profileId ? QUERY_GET_USER : QUERY_ME,
-    {
-      variables: { profileId: profileId},
-    }
-  )
-
-  const profile = data?.me || data?.profile || {};
-
-  if( Auth.loggedIn() && Auth.getProfile().data._id === profileId ) {
-    return < Navigate to = "/me" />;
-  }
-
-  if( loading ) {
-    return(
-      <div>Loading...</div>
-    );
-  }
-
-  if( !profile?.name) {
-    return(
-      <h1>Log in Sucka!</h1>
-    )
-  }
-
-
   return (
     <header className="bd-header py-3 d-flex align-items-stretch">
       <div className="container-fluid d-flex justify-content-center">
@@ -53,7 +20,7 @@ const Navigation = () => {
               data-bs-target="#navbarsExample03"
               aria-controls="navbarsExample03"
               aria-expanded="false"
-              aria-label="Toggle navigation"
+              aria-label="Toggle SplashNav"
             >
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -84,11 +51,11 @@ const Navigation = () => {
                     to="/Home"
                   >
                     <img
-                      className="logo"
-                      src={require("../images/new-nt-site-logo-2.png")}
+                      className="mb-4"
+                      src="https://www.freeiconspng.com/thumbs/dragon-png/dragon-png-20.png"
                       alt=""
-                      width="200"
-                      height="125"
+                      width="250"
+                      height="200"
                     />
                   </Link>
                 </li>
@@ -96,7 +63,7 @@ const Navigation = () => {
                   <Link
                     className="nav-link"
                     activeclassname="is-active"
-                    to={`/profile/${profile._id}`}
+                    to="/profile"
                   >
                     Profile
                   </Link>
@@ -118,32 +85,7 @@ const Navigation = () => {
     </header>
   );
 };
-// function Navigation() {
-//   return (
 
-//     // second try
-//     // <NavLink
-//     //   className="navbar-item"
-//     //   activeClassName="is-active"
-//     //   to="/client/src/Pages/Inventory.js"
-//     //   exact
-//     // >
-//     //   Inventory
-//     // </NavLink>
-
-// // first try
-//     // <nav>
-//     //   <ul>
-//     //     <li className="nav-item"><Link to="/inventory">Inventory</Link></li>
-//     //     <li><Link to="/market">Market</Link></li>
-//     //     <li><Link to="/profile">User</Link></li>
-//     //     <li>Create Shop</li>
-//     //     <li><Link to="/inventory">Contact</Link></li>
-//     //   </ul>
-//     // </nav>
-//   );
-// }
-
-export default Navigation;
+export default SplashNav;
 
 // for create shop: option to bring in D&D API information

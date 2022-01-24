@@ -24,6 +24,7 @@ export const QUERY_GET_USER = gql`
       dungeonMaster
       inventory
       gold
+      savedFilters
     }
   }
 `;
@@ -38,6 +39,7 @@ export const QUERY_ME = gql`
       dungeonMaster
       inventory
       gold
+      savedFilters
     }
   }
 `;
@@ -55,6 +57,7 @@ export const QUERY_GET_ITEMS = gql`
 
 //gets the specified storeFilter
 export const QUERY_GET_FILTER = gql`
+  query getFilter($storeId: ID!){
   storeFilter(storeId:$storeId){
     _id
     name
@@ -65,4 +68,5 @@ export const QUERY_GET_FILTER = gql`
     weaponFilter
     inflationVariable
   }
+}
 `;
