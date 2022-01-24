@@ -50,15 +50,11 @@ const Signup = () => {
       console.error(error);
     }
   };
-
   return (
     <div className="container text-center" cz-shortcut-listen="true">
       <main className="form-signin d-flex justify-content-center mb-3">
         {data ? (
-          <p>
-            Success! You can now head{" "}
-            <Navigate to={`/profile/${data.login.profile._id}`}></Navigate>
-          </p>
+          <Navigate to={`/profile/${data.addProfile.profile._id}`}></Navigate>
         ) : (
           <form onSubmit={handleFormSubmit}>
             <img
