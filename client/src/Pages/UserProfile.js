@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Item from "../components/LineItem";
-import { Navigate, useParams} from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom";
 import {
   MAGIC_ITEMS,
   ALL_EQUEPMENT,
   MONSTERS_QUERY,
   MONSTER_QUERY,
 } from "../utils/api";
-import { QUERY_GET_USER, QUERY_ME} from "../utils/queries";
+import { QUERY_GET_USER, QUERY_ME } from "../utils/queries";
 
 import Auth from "../utils/auth";
 import { useQuery, useSubscription } from "@apollo/client";
 
-
-
 const UserProfile = () => {
-  
   const { profileId } = useParams();
 
   const [equipments, setEquipments] = useState([]);
@@ -25,43 +22,43 @@ const UserProfile = () => {
     });
   }, []);
 
-  const {loading, data} = useQuery(
-    profileId ? QUERY_GET_USER : QUERY_ME,
-    {
-      variables: { profileId: profileId},
-    }
-  )
+  const { loading, data } = useQuery(profileId ? QUERY_GET_USER : QUERY_ME, {
+    variables: { profileId: profileId },
+  });
 
   const profile = data?.me || data?.profile || {};
 
-  if( Auth.loggedIn() && Auth.getProfile().data._id === profileId ) {
-    return < Navigate to = "/me" />;
+  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+    return <Navigate to="/me" />;
   }
 
-  if( loading ) {
-    return(
-      <div>Loading...</div>
-    );
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  if( !profile?.name) {
-    return(
-      <h1>Log in Sucka!</h1>
-    )
+  if (!profile?.name) {
+    return <h1>Log in Sucka!</h1>;
   }
-
+  console.log(profile);
 
   return (
     <div>
       <div>
         <h1>Your User Profile </h1>
       </div>
-      <div> Current Gold On Hand:  </div>
+      <div> Current Gold On Hand: </div>
       <div>
         <ul>
           <li>Name: {profile.name}</li>
           <li>Current Gold: {profile.gold}</li>
-          <li>Are you a Dungeon Master?</li>
+          <li>
+            Are you a Dungeon Master?{" "}
+            <b>
+              {profile.dungeonMaster
+                ? "Well yeah! Hello Dungeon Master!"
+                : "ehh no, Not a dungeon master"}
+            </b>{" "}
+          </li>
         </ul>
       </div>
       <div>
