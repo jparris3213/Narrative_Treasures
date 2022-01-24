@@ -96,8 +96,11 @@ export const ADD_FILTER = gql`
   mutation addFilter(
     $name: String!
     $playerList: [String]
-    $goldFilter: Int
-    $weaponTypeFilter: [String]
+    $goldMin: Int
+    $goldMax: Int
+    $adventureGearFilter: Boolean
+    $toolsFilter: Boolean
+    $mountsFilter: Boolean
     $armorFilter: Boolean
     $weaponFilter: Boolean
     $inflationVariable: Int
@@ -105,8 +108,11 @@ export const ADD_FILTER = gql`
     addFilter(
       name: $name
       playerList: $playerList
-      goldFilter: $goldFilter
-      weaponTypeFilter: $weaponTypeFilter
+      goldMin: $goldMin
+      goldMax: $goldMax
+      adventureGearFilter: $adventureGearFilter
+      toolsFilter: $toolsFilter
+      mountsFilter: $mountsFilter
       armorFilter: $armorFilter
       weaponFilter: $weaponFilter
       inflationVariable: $inflationVariable
@@ -114,8 +120,11 @@ export const ADD_FILTER = gql`
       _id
       name
       playerList
-      goldFilter
-      weaponTypeFilter
+      goldMin
+      goldMax
+      adventureGearFilter
+      toolsFilter
+      mountsFilter
       armorFilter
       weaponFilter
       inflationVariable

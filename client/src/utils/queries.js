@@ -57,16 +57,19 @@ export const QUERY_GET_ITEMS = gql`
 
 //gets the specified storeFilter
 export const QUERY_GET_FILTER = gql`
-  query getFilter($storeId: ID!){
-  storeFilter(storeId:$storeId){
-    _id
-    name
-    playerList
-    goldFilter
-    weaponTypeFilter
-    armorFilter
-    weaponFilter
-    inflationVariable
+  query getFilter($storeId: ID!) {
+    storeFilter(storeId: $storeId) {
+      _id
+      name
+      playerList
+      goldMin
+      goldMax
+      adventureGearFilter
+      toolsFilter
+      mountsFilter
+      armorFilter
+      weaponFilter
+      inflationVariable
+    }
   }
-}
 `;
