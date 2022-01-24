@@ -63,7 +63,7 @@ const Signup = () => {
     return <div>Loading...</div>;
   }
 
-  const profile = data?.me || data?.profile || {};
+  const profile = data2?.me || data?.profile || {};
 
   return (
     <div className="container text-center" cz-shortcut-listen="true">
