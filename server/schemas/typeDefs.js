@@ -24,8 +24,11 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     playerList: [String]
-    goldFilter: Int
-    weaponTypeFilter: [String]
+    goldMin: Int
+    goldMax: Int
+    adventureGearFilter: Boolean
+    toolsFilter: Boolean
+    mountsFilter: Boolean
     armorFilter: Boolean
     weaponFilter: Boolean
     inflationVariable: Int
@@ -74,8 +77,11 @@ const typeDefs = gql`
     addFilter(
       name: String!
       playerList: [String]
-      goldFilter: Int
-      weaponTypeFilter: [String]
+      goldMin: Int
+      goldMax: Int
+      adventureGearFilter: Boolean
+      toolsFilter: Boolean
+      mountsFilter: Boolean
       armorFilter: Boolean
       weaponFilter: Boolean
       inflationVariable: Int
