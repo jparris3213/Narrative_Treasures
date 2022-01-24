@@ -6,6 +6,7 @@ import { ADD_PROFILE } from "../utils/mutation";
 
 import { Navigate, useParams } from "react-router-dom";
 import { QUERY_GET_USER, QUERY_ME } from "../utils/queries";
+import { useQuery, useSubscription } from "@apollo/client";
 
 import Auth from "../utils/auth";
 
