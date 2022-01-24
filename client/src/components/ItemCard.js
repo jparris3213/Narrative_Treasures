@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import IconSwitch from "./Icon_Switch";
+import { useMutation } from "@apollo/client";
+import { ADD_INVENTORY } from "../utils/mutation";
+import AuthService from "../utils/auth";
 
 function Card(props) {
   const { item, inflationValue } = props;
@@ -7,11 +10,14 @@ function Card(props) {
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [addInventory, { error, data }] = useMutation(ADD_INVENTORY);
+
   function flipCard(event) {
     setIsOpen(!isOpen);
   }
 
   const {
+    index,
     name,
     equipment_category: { name: categoryName },
     cost: { quantity, unit },
@@ -57,6 +63,19 @@ function Card(props) {
   displayCost[2] = Math.floor(
     ((finalCost - displayCost[0]) * 10 - displayCost[1]) * 10
   );
+
+  const onClick = async (event) => {
+    try {
+      const { data } = await addInventory({
+        variables: {
+          profileId: AuthService.getProfile().data._id,
+          item: index,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div className="container" style={{ margin: "0px", padding: "0px" }}>
@@ -117,14 +136,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -180,14 +194,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -213,14 +222,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -246,14 +250,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -284,13 +283,9 @@ function Card(props) {
               </div>
               <p>{vehicleCategory}</p>
               <p>
-                <a
-                  className="btn"
-                  href="This will add to inventory"
-                  target="_blank"
-                >
+                <button className="btn" onClick={onClick}>
                   Add to inventory
-                </a>
+                </button>
               </p>
             </div>
           )}
@@ -301,13 +296,9 @@ function Card(props) {
               <p>Weight: {weight}</p>
               <p style={discStyle}>{desc}</p>
               <p>
-                <a
-                  className="btn"
-                  href="This will add to inventory"
-                  target="_blank"
-                >
+                <button className="btn" onClick={onClick}>
                   Add to inventory
-                </a>
+                </button>
               </p>
             </div>
           )}
@@ -321,13 +312,9 @@ function Card(props) {
               </p>
               <p style={discStyle}>{desc}</p>
               <p>
-                <a
-                  className="btn"
-                  href="This will add to inventory"
-                  target="_blank"
-                >
+                <button className="btn" onClick={onClick}>
                   Add to inventory
-                </a>
+                </button>
               </p>
             </div>
           )}
