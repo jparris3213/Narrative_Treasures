@@ -86,13 +86,22 @@ const UserProfile = () => {
                 <tbody>
                   {" "}
                   <b>
-                    {profile.inventory.length > 0
+                    {profile.inventory.length
                       ? profile.inventory.map((item) => {
-                          return <p>{item}</p>;
+                          // return <p key={item.index}>{item}</p>; for testing does work!
+                          return <Item equipment={item} key={item.index} />;
                         })
                       : "ehh no inventory!"}
                   </b>
                 </tbody>
+                {/* <tbody>
+                  {equipments.length &&
+                    equipments.map((equipment) => {
+                      return (
+                        <Item equipment={equipment} key={equipment.index} />
+                      );
+                    })}
+                </tbody> */}
               </table>
             </div>
           </div>
