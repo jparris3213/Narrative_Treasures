@@ -20,7 +20,7 @@ const Splash = () => {
         <Link className="btn btn-lg btn-2 text-light" to="/signup">
           Sign up
         </Link>
-        <Link className="btn btn-lg btn-2 text-light" to="/home">
+        <Link className="btn btn-lg btn-2 text-light" to="/login">
           Log in
         </Link>
       </div>
