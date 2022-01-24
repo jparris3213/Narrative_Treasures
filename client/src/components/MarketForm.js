@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 function MarketForm({ updateSort }) {
+  const [shopName, setShopName] = useState("");
+  const [inflationValue, setInflationValue] = useState(1);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
   const [noArmor, setNoArmor] = useState(false);
@@ -29,6 +31,10 @@ function MarketForm({ updateSort }) {
       setNoTools(noTools ? false : true);
     } else if (inputType === "noMountsVehicles") {
       setNoMountsVehicles(noMountsVehicles ? false : true);
+    } else if (inputType === "shopName") {
+      setShopName(inputValue);
+    } else if (inputType === "inflationValue") {
+      setInflationValue(inputValue);
     }
   };
 
@@ -46,6 +52,8 @@ function MarketForm({ updateSort }) {
     }
 
     updateSort({
+      shopName: shopName,
+      inflationValue: inflationValue,
       minValue: minValue,
       maxValue: maxValue,
       noArmor: noArmor,
@@ -58,9 +66,17 @@ function MarketForm({ updateSort }) {
 
   return (
     <form className="d-flex flex-column">
-
       <div className="d-flex p-1 bd-highlight flex-row justify-content-center">
         <div className="p-4">
+          <label>Shop Name:</label>
+          <br />
+          <input
+            type="text"
+            name="shopName"
+            value={shopName}
+            onChange={handleInputChange}
+          />
+          <br />
           <label>Minimum Gold Value:</label>
           <br />
           <input
@@ -86,10 +102,19 @@ function MarketForm({ updateSort }) {
             <br />
             Leave values to not filter by price.
           </p>
-        </div>
-        <fieldset className="p-4">
-          <legend>Exclude</legend>
-          <div className="d-flex flex-row">
+          <label>Price Modifier:</label>
+          <br />
+          <input
+            type="number"
+            name="inflationValue"
+            value={inflationValue}
+            onChange={handleInputChange}
+          />
+          <br />
+          <p>This changes the cost of the Item</p>
+          <p></p>
+          <fieldset>
+            <legend>Exclude</legend>
             <div>
               <input
                 type="checkbox"
@@ -132,20 +157,18 @@ function MarketForm({ updateSort }) {
               />
               <label> Mounts and Vehicles</label>
             </div>
-          </div>
-        </fieldset>
-      </div>
-      <div className="p-2 d-flex flex-column align-items-center">
-        <input
-          type="submit"
-          onClick={hadleFormSubmit}
-          className="btn text-light w-25"
-        />
-        {errorMessage && (
-          <div>
-            <p className="error-text">{errorMessage}</p>
-          </div>
-        )}
+          </fieldset>
+          <input
+            type="submit"
+            onClick={hadleFormSubmit}
+            className="btn text-light"
+          />
+          {errorMessage && (
+            <div>
+              <p className="error-text">{errorMessage}</p>
+            </div>
+          )}
+        </div>
       </div>
     </form>
   );

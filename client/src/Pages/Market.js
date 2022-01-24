@@ -8,7 +8,17 @@ import filterItems from "../utils/filterMarket";
 const Market = () => {
   const [equipments, setEquipments] = useState([]);
   const [displayItems, setDisplayItems] = useState([]);
-  const [sort, setSort] = useState({});
+  const [sort, setSort] = useState({
+    shopName: "",
+    inflationValue: 1,
+    minValue: 0,
+    maxValue: 0,
+    noArmor: false,
+    noWeapon: false,
+    noAdventuringGear: false,
+    noTools: false,
+    noMountsVehicles: false,
+  });
 
   useEffect(() => {
     ALL_EQUEPMENT().then(({ data }) => {
@@ -25,30 +35,43 @@ const Market = () => {
   }
 
   return (
-
     //Filter Information
     <div>
       <div className="container text-center">
         <h1>Marketplace</h1>
         <p3>Remember: Shop Smart...Shop S-Mart</p3>
       </div>
-      <div clasName="row">
-      <div className="">
+      <div className="row">
+        <div className="">
+          <div
+            className="col p-2"
+            style={{ float: "left", margin: "0", width: "20vw" }}
+          >
+            <MarketForm updateSort={updateSort} />
+          </div>
 
-      <div className="col" style={{float:"left", margin: "0"}}><MarketForm updateSort={updateSort} /></div>
-      
-
-      <div className="col" style={{margin: "0", padding: "0"}}>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3" style={{margin: "0", padding: "0"}}>
-          {displayItems.length ? (
-            displayItems.map((item) => {
-              return <Card item={item} key={item.index} />;
-            })
-          ) : (
-            <Loading />
-          )}
+          <div className="col" style={{ margin: "0", padding: "0" }}>
+            <div
+              className="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3"
+              style={{ margin: "0", padding: "0", width: "75vw" }}
+            >
+              {displayItems.length ? (
+                displayItems.map((item) => {
+                  return (
+                    <Card
+                      item={item}
+                      key={item.index}
+                      inflationValue={sort.inflationValue}
+                    />
+                  );
+                })
+              ) : (
+                <Loading />
+              )}
+            </div>
+          </div>
         </div>
-      </div></div></div>
+      </div>
     </div>
   );
 };

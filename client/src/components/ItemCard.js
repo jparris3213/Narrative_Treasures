@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import IconSwitch from "./Icon_Switch";
 
 function Card(props) {
-  const { item } = props;
+  const { item, inflationValue } = props;
   const discStyle = { fontSize: "8px" };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -33,28 +33,37 @@ function Card(props) {
     capacity,
   } = item;
 
-  let gpCost = 0;
+  let baseGpCost = 0;
   if (unit === "gp") {
-    gpCost = quantity;
+    baseGpCost = quantity;
   } else if (unit === "sp") {
-    gpCost = quantity * 0.1;
+    baseGpCost = quantity * 0.1;
   } else if (unit === "cp") {
-    gpCost = quantity * 0.01;
+    baseGpCost = quantity * 0.01;
   }
 
   let rarity = "";
 
-  if (gpCost < 10) rarity = "common";
-  else if (gpCost < 500) rarity = "uncommon";
-  else if (gpCost < 2500) rarity = "rare";
+  if (baseGpCost < 10) rarity = "common";
+  else if (baseGpCost < 500) rarity = "uncommon";
+  else if (baseGpCost < 2500) rarity = "rare";
   else rarity = "artifact";
 
+  let finalCost = baseGpCost * inflationValue;
+
+  let displayCost = [];
+  displayCost[0] = Math.floor(finalCost);
+  displayCost[1] = Math.floor((finalCost - Math.floor(finalCost)) * 10);
+  displayCost[2] = Math.floor(
+    ((finalCost - displayCost[0]) * 10 - displayCost[1]) * 10
+  );
+
   return (
-    <div className="container" style={{margin: "0px", padding: "0px"}}>
+    <div className="container" style={{ margin: "0px", padding: "0px" }}>
       <div
         className={isOpen ? "element-card open" : "element-card"}
         onClick={flipCard}
-        style={{margin: "0px", padding: "0px"}}
+        style={{ margin: "0px", padding: "0px" }}
       >
         <div className={`front-facing front-facing-${rarity}`}>
           <h1 className="abr">
@@ -66,18 +75,19 @@ function Card(props) {
 
           {quantity !== 0 && (
             <span className="atomic-number">
-              {quantity}
-              {unit}
+              {displayCost[0] ? <p>{displayCost[0]} GP</p> : <></>}
+              {displayCost[1] ? <p>{displayCost[1]} SP</p> : <></>}
+              {displayCost[2] ? <p>{displayCost[2]} CP</p> : <></>}
             </span>
           )}
         </div>
         {categoryName === "Weapon" && (
           <div className={`back-facing ${rarity}`}>
             <div
-              class="table-responsive"
+              className="table-responsive"
               style={{ fontSize: "12px", overflow: "hidden", padding: "0px" }}
             >
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Range</th>
@@ -91,7 +101,7 @@ function Card(props) {
                   </tr>
                 </tbody>
               </table>
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Type</th>
@@ -121,10 +131,10 @@ function Card(props) {
         {categoryName === "Armor" && (
           <div className={`back-facing ${rarity}`}>
             <div
-              class="table-responsive"
+              className="table-responsive"
               style={{ fontSize: "12px", overflow: "hidden", padding: "0px" }}
             >
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Type</th>
@@ -138,7 +148,7 @@ function Card(props) {
                   </tr>
                 </tbody>
               </table>
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Weight</th>
@@ -153,7 +163,7 @@ function Card(props) {
                 </tbody>
               </table>
 
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Properties</th>
@@ -184,10 +194,10 @@ function Card(props) {
         {categoryName === "Adventuring Gear" && (
           <div className={`back-facing ${rarity}`}>
             <div
-              class="table-responsive"
+              className="table-responsive"
               style={{ fontSize: "15px", overflow: "hidden", padding: "0px" }}
             >
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Weight</th>
@@ -217,10 +227,10 @@ function Card(props) {
         {categoryName === "Tools" && (
           <div className={`back-facing ${rarity}`}>
             <div
-              class="table-responsive"
+              className="table-responsive"
               style={{ fontSize: "15px", overflow: "hidden", padding: "0px" }}
             >
-              <table class="table">
+              <table className="table">
                 <thead>
                   <tr>
                     <th>Weight</th>
@@ -250,27 +260,28 @@ function Card(props) {
         {categoryName === "Mounts and Vehicles" &&
           vehicleCategory === "Mounts and Other Animals" && (
             <div className={`back-facing ${rarity}`}>
-              
-            <div
-              class="table-responsive"
-              style={{ fontSize: "15px", overflow: "hidden", padding: "0px" }}
-            >
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Speed</th>
-                    <th>Capacity</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{speedQuantity}
-                {speedUnit}</td>
-                    <td>{capacity}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <div
+                className="table-responsive"
+                style={{ fontSize: "15px", overflow: "hidden", padding: "0px" }}
+              >
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Speed</th>
+                      <th>Capacity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        {speedQuantity}
+                        {speedUnit}
+                      </td>
+                      <td>{capacity}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <p>{vehicleCategory}</p>
               <p>
                 <a
