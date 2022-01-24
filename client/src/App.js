@@ -8,7 +8,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react";
 
 // importing components
 import Footer from "./components/Footer";
@@ -23,7 +23,7 @@ import Monsters from "./Pages/Monsters";
 import Signup from "./Pages/Signup";
 import Monster from "./Pages/Monster";
 import Splash from "./Pages/Splash";
-import Login from "./Pages/Login"
+import Login from "./Pages/Login";
 
 // making GraphQL API endpoint
 const httpLink = createHttpLink({
