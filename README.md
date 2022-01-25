@@ -9,7 +9,6 @@ _Anthony Linebaugh, Graham Clayton, Jacob Parris, Naomi Smith, Neal Smith_
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [Tests](#tests)
 - [Questions](#questions)
 - [License](#license)
 
@@ -20,6 +19,13 @@ _Anthony Linebaugh, Graham Clayton, Jacob Parris, Naomi Smith, Neal Smith_
 ## Build
 
 - [React](https://reactjs.org/docs/getting-started.html)
+- [Mongoose](https://mongoosejs.com/docs/guide.html)
+- [Schema](https://schema.org/docs/schemas.html)
+- [Express](https://expressjs.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [JWT](https://jwt.io/introduction)
+- [node](https://nodejs.org/en/about/)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
 
 ## Installation
 
@@ -30,24 +36,21 @@ run accurate packages
 
 ## Usage
 
+![Narrative Treasures](client/src/images/homepage.png)
+
+<!-- Live webpage and image or Screencastify -->
+
+#### Webpage
+
 #### Demo Account
 
 - name: GuestUser
 - email: guestuser101@gmail.com
 - password: guestuser101
 
-#### Webpage
-
-<!-- Live webpage and image or Screencastify -->
-
-## Tests
-
-To test, please run the following command;
-' ' '
-
 ## Contributing
 
-Please reach out via provided Github
+Please reach out via provided Github or Email
 
 ## Questions
 

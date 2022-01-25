@@ -177,12 +177,14 @@
 }
 
 .btn-2 {
-  background-color: rgb(98, 20, 0);
+  background-color: burlywood;
   margin: 3rem;
 }
 
 .splash-text {
+  background-color: rgb(98, 20, 0);
   font-size: x-large;
+  width: 20rem;
   margin: 3rem;
 }
 
