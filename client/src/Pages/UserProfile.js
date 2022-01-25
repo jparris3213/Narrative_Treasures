@@ -56,7 +56,6 @@ const UserProfile = () => {
     return <h1>Log in Sucka!</h1>;
   }
 
-  console.log(profile);
   return (
     <div>
       <div>
@@ -105,7 +104,6 @@ const UserProfile = () => {
                     ? profile.inventory.map((item) => {
                         //return <p key={item.index}>{item}</p>; //for testing does work!
                         const equipment = JSON.parse(item);
-                        console.log(equipment);
                         return (
                           <Item equipment={equipment} key={equipment.index} />
                         );
