@@ -4,6 +4,8 @@ import Loading from "../components/Loading";
 import MarketForm from "../components/MarketForm";
 import { ALL_EQUEPMENT } from "../utils/api";
 import filterItems from "../utils/filterMarket";
+import { QUERY_ME } from "../utils/queries";
+import { useQuery } from "@apollo/client";
 
 const Market = () => {
   const [equipments, setEquipments] = useState([]);
@@ -19,6 +21,16 @@ const Market = () => {
     noTools: false,
     noMountsVehicles: false,
   });
+  const userGold = useQuery(QUERY_ME).data.me.gold;
+
+  let displayGold = [];
+  if (userGold) {
+    displayGold[0] = Math.floor(userGold);
+    displayGold[1] = Math.floor((userGold - Math.floor(userGold)) * 10);
+    displayGold[2] = Math.floor(
+      ((userGold - displayGold[0]) * 10 - displayGold[1]) * 10
+    );
+  }
 
   useEffect(() => {
     ALL_EQUEPMENT().then(({ data }) => {
@@ -40,6 +52,12 @@ const Market = () => {
       <div className="container text-center">
         <h1>Marketplace</h1>
         <p3>Remember: Shop Smart...Shop S-Mart</p3>
+        <br />
+        <p3>
+          {displayGold[0] ? <>{displayGold[0]}GP</> : <></>}
+          {displayGold[1] ? <>{displayGold[1]}SP</> : <></>}
+          {displayGold[2] ? <>{displayGold[2]}CP</> : <></>}
+        </p3>
       </div>
       <div className="row">
         <div className="">
