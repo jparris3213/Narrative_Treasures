@@ -39,7 +39,6 @@ const UserProfile = () => {
   if (!profile?.name) {
     return <h1>Log in Sucka!</h1>;
   }
-  console.log(profile);
 
   return (
     <div>

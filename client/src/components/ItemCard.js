@@ -73,7 +73,7 @@ function Card(props) {
         await addInventory({
           variables: {
             profileId: AuthService.getProfile().data._id,
-            item: index,
+            item: JSON.stringify(item),
           },
         });
         await updateGold({
