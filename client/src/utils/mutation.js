@@ -20,7 +20,7 @@ export const ADD_PROFILE = gql`
     $email: String!
     $password: String!
     $dungeonMaster: Boolean!
-    $gold: Int!
+    $gold: Float!
   ) {
     addProfile(
       name: $name
@@ -40,7 +40,7 @@ export const ADD_PROFILE = gql`
 
 //mutation used for changing users gold count, must first do the math on the current gold count the user has adding/subtracting, get the answer and use that for the mutation
 export const CHANGE_GOLD = gql`
-  mutation changeGold($profileId: ID!, $goldSet: Int!) {
+  mutation changeGold($profileId: ID!, $goldSet: Float!) {
     changeGold(profileId: $profileId, goldSet: $goldSet) {
       name
       gold
