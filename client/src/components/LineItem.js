@@ -63,7 +63,7 @@ function Item(props) {
   return (
     <tr>
       <td>{name}</td>
-      <td>5</td>
+      <td>1</td>
       {desc[0] ? (
         <td> {desc[0]} </td>
       ) : (
