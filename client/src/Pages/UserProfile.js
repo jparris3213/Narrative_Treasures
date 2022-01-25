@@ -30,7 +30,6 @@ const UserProfile = () => {
   //contains the info we need from the user
   const profile = data?.me || data?.profile || {};
 
-<<<<<<< HEAD
   const userGold = profile.gold;
 
   let displayGold = [];
@@ -42,8 +41,6 @@ const UserProfile = () => {
     );
   }
 
-=======
->>>>>>> main
   //for redirecting the user to their profile
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
     return <Navigate to="/me" />;
