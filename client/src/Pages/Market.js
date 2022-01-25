@@ -27,13 +27,11 @@ const Market = () => {
 
   const changeGold = (userGold) => {
     if (userGold) {
-      console.log(userGold);
       displayGold[0] = Math.floor(userGold);
       displayGold[1] = Math.floor((userGold - Math.floor(userGold)) * 10);
       displayGold[2] = Math.floor(
         ((userGold - displayGold[0]) * 10 - displayGold[1]) * 10
       );
-      console.log(displayGold);
     }
   };
 

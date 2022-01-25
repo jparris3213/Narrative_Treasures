@@ -60,7 +60,6 @@ function Item(props) {
     ferengi = "green";
   }
   //--------------------------------------------------------------------------------------------------------
-  console.log(properties);
   return (
     <tr>
       <td>{name}</td>
