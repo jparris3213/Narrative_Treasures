@@ -20,7 +20,6 @@ function Card(props) {
   }
 
   const {
-    index,
     name,
     equipment_category: { name: categoryName },
     cost: { quantity, unit },
@@ -82,6 +81,7 @@ function Card(props) {
             goldSet: userGold - finalCost,
           },
         });
+        alert(`You just bought a ${name}`);
       } catch (e) {
         console.error(e);
       }

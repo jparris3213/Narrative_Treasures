@@ -52,6 +52,7 @@ const Market = () => {
       <div className="container text-center">
         <h1>Marketplace</h1>
         <p3>Remember: Shop Smart...Shop S-Mart</p3>
+        <br />
         <p3>
           {displayGold[0] ? <>{displayGold[0]}GP</> : <></>}
           {displayGold[1] ? <>{displayGold[1]}SP</> : <></>}
