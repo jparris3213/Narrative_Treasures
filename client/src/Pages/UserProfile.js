@@ -88,8 +88,8 @@ const UserProfile = () => {
                   <b>
                     {profile.inventory.length
                       ? profile.inventory.map((item) => {
-                          // return <p key={item.index}>{item}</p>; for testing does work!
-                          return <Item equipment={item} key={item.index} />;
+                          return <p key={item.index}>{item}</p>; //for testing does work!
+                          //return <Item equipment={item} key={item.index} />;
                         })
                       : "ehh no inventory!"}
                   </b>
