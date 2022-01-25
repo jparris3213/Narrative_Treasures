@@ -1,4 +1,6 @@
 import React from "react";
+import { useMutation } from "react-router-dom";
+//import { delete } from '../utils/mutation';
 
 function Item(props) {
   const { equipment, magicItems, sort } = props;
@@ -88,6 +90,7 @@ function Item(props) {
       ) : (
         <td>No Properties</td>
       )}
+      {/* <td><button onClick={deleteThis}>x</button></td> */}
     </tr>
   );
 }
