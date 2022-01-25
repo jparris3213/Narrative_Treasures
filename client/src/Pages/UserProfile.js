@@ -22,24 +22,39 @@ const UserProfile = () => {
     });
   }, []);
 
+  //for getting the data of the user logged in
   const { loading, data } = useQuery(profileId ? QUERY_GET_USER : QUERY_ME, {
     variables: { profileId: profileId },
   });
 
+  //contains the info we need from the user
   const profile = data?.me || data?.profile || {};
 
+  const userGold = profile.gold;
+
+  let displayGold = [];
+  if (userGold) {
+    displayGold[0] = Math.floor(userGold);
+    displayGold[1] = Math.floor((userGold - Math.floor(userGold)) * 10);
+    displayGold[2] = Math.floor(
+      ((userGold - displayGold[0]) * 10 - displayGold[1]) * 10
+    );
+  }
+
+  //for redirecting the user to their profile
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
     return <Navigate to="/me" />;
   }
 
+  //if page is loading shows loading
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  //checks if user is logged in
   if (!profile?.name) {
     return <h1>Log in Sucka!</h1>;
   }
-  console.log(profile);
 
   return (
     <div>
@@ -50,7 +65,11 @@ const UserProfile = () => {
       <div>
         <ul>
           <li>Name: {profile.name}</li>
-          <li>Current Gold: {profile.gold}</li>
+          <li>
+            Current Gold: {displayGold[0] ? <>{displayGold[0]} GP</> : <></>}
+            {displayGold[1] ? <>{displayGold[1]}SP</> : <></>}
+            {displayGold[2] ? <>{displayGold[2]} CP</> : <></>}
+          </li>
           <li>
             Are you a Dungeon Master?{" "}
             <b>
@@ -72,20 +91,33 @@ const UserProfile = () => {
                     <th scope="col">Item</th>
                     <th scope="col">Qty</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Dice</th>
+                    <th scope="col">Equipment Category</th>
                     <th scope="col">Cost</th>
-                    <th scope="col">Market Price</th>
-                    <th scope="col">Profit/Loss</th>
+                    <th scope="col">Dice</th>
+                    <th scope="col">Weapon Range</th>
+                    <th scope="col">Properties</th>
                   </tr>
                 </thead>
                 <tbody>
+                  {" "}
+                  {profile.inventory.length
+                    ? profile.inventory.map((item) => {
+                        //return <p key={item.index}>{item}</p>; //for testing does work!
+                        const equipment = JSON.parse(item);
+                        return (
+                          <Item equipment={equipment} key={equipment.index} />
+                        );
+                      })
+                    : "ehh no inventory!"}
+                </tbody>
+                {/* <tbody>
                   {equipments.length &&
                     equipments.map((equipment) => {
                       return (
                         <Item equipment={equipment} key={equipment.index} />
                       );
                     })}
-                </tbody>
+                </tbody> */}
               </table>
             </div>
           </div>

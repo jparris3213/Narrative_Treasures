@@ -94,10 +94,11 @@
   border: 2px black solid;
   border-radius: 5px;
 }
+
 .element-card .front-facing .abr {
   width: 100%;
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 0;
   font-size: 32px;
   margin: -35px 0 0 0;

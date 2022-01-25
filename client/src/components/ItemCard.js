@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import IconSwitch from "./Icon_Switch";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADD_INVENTORY, CHANGE_GOLD } from "../utils/mutation";
+import { QUERY_ME } from "../utils/queries";
+import AuthService from "../utils/auth";
 
 function Card(props) {
-  const { item, inflationValue } = props;
+  const { item, inflationValue, changeGold, userGold } = props;
   const discStyle = { fontSize: "8px" };
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const [addInventory] = useMutation(ADD_INVENTORY);
+  const [updateGold] = useMutation(CHANGE_GOLD);
 
   function flipCard(event) {
     setIsOpen(!isOpen);
@@ -58,6 +65,31 @@ function Card(props) {
     ((finalCost - displayCost[0]) * 10 - displayCost[1]) * 10
   );
 
+  const onClick = async (event) => {
+    if (userGold >= finalCost) {
+      try {
+        await addInventory({
+          variables: {
+            profileId: AuthService.getProfile().data._id,
+            item: JSON.stringify(item),
+          },
+        });
+        await updateGold({
+          variables: {
+            profileId: AuthService.getProfile().data._id,
+            goldSet: userGold - finalCost,
+          },
+        });
+        changeGold(userGold - finalCost);
+        alert(`You just bought a ${name}`);
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      alert("You dont have enough money!!!");
+    }
+  };
+
   return (
     <div className="container" style={{ margin: "0px", padding: "0px" }}>
       <div
@@ -91,6 +123,8 @@ function Card(props) {
                 <thead>
                   <tr>
                     <th>Range</th>
+                    {normal ? <th>normal:{normal}</th> : <></>}
+                    {long ? <th>long: {long}</th> : <></>}
                     <th>Dmg</th>
                   </tr>
                 </thead>
@@ -117,14 +151,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -180,14 +209,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -213,14 +237,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -246,14 +265,9 @@ function Card(props) {
               </table>
             </div>
             <p>
-              <a
-                className="btn"
-                href="This will add to inventory"
-                target="_blank"
-                style={{ fontSize: "12px" }}
-              >
+              <button className="btn" onClick={onClick}>
                 Add to inventory
-              </a>
+              </button>
             </p>
           </div>
         )}
@@ -284,13 +298,9 @@ function Card(props) {
               </div>
               <p>{vehicleCategory}</p>
               <p>
-                <a
-                  className="btn"
-                  href="This will add to inventory"
-                  target="_blank"
-                >
+                <button className="btn" onClick={onClick}>
                   Add to inventory
-                </a>
+                </button>
               </p>
             </div>
           )}
@@ -301,13 +311,9 @@ function Card(props) {
               <p>Weight: {weight}</p>
               <p style={discStyle}>{desc}</p>
               <p>
-                <a
-                  className="btn"
-                  href="This will add to inventory"
-                  target="_blank"
-                >
+                <button className="btn" onClick={onClick}>
                   Add to inventory
-                </a>
+                </button>
               </p>
             </div>
           )}
@@ -321,13 +327,9 @@ function Card(props) {
               </p>
               <p style={discStyle}>{desc}</p>
               <p>
-                <a
-                  className="btn"
-                  href="This will add to inventory"
-                  target="_blank"
-                >
+                <button className="btn" onClick={onClick}>
                   Add to inventory
-                </a>
+                </button>
               </p>
             </div>
           )}
