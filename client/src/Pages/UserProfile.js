@@ -22,24 +22,30 @@ const UserProfile = () => {
     });
   }, []);
 
+  //for getting the data of the user logged in
   const { loading, data } = useQuery(profileId ? QUERY_GET_USER : QUERY_ME, {
     variables: { profileId: profileId },
   });
 
+  //contains the info we need from the user
   const profile = data?.me || data?.profile || {};
 
+  //for redirecting the user to their profile
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
     return <Navigate to="/me" />;
   }
 
+  //if page is loading shows loading
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  //checks if user is logged in
   if (!profile?.name) {
     return <h1>Log in Sucka!</h1>;
   }
 
+  console.log(profile);
   return (
     <div>
       <div>
@@ -78,13 +84,24 @@ const UserProfile = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  {" "}
+                  <b>
+                    {profile.inventory.length
+                      ? profile.inventory.map((item) => {
+                          return <p key={item.index}>{item}</p>; //for testing does work!
+                          //return <Item equipment={item} key={item.index} />;
+                        })
+                      : "ehh no inventory!"}
+                  </b>
+                </tbody>
+                {/* <tbody>
                   {equipments.length &&
                     equipments.map((equipment) => {
                       return (
                         <Item equipment={equipment} key={equipment.index} />
                       );
                     })}
-                </tbody>
+                </tbody> */}
               </table>
             </div>
           </div>

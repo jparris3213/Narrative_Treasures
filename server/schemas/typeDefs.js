@@ -8,7 +8,7 @@ const typeDefs = gql`
     password: String!
     dungeonMaster: Boolean!
     inventory: [String]
-    gold: Int!
+    gold: Float!
     savedFilters: [String]
   }
 
@@ -54,12 +54,12 @@ const typeDefs = gql`
       email: String!
       password: String!
       dungeonMaster: Boolean!
-      gold: Int!
+      gold: Float!
     ): Auth
 
     login(email: String!, password: String!): Auth
 
-    changeGold(profileId: ID!, goldSet: Int!): Profile
+    changeGold(profileId: ID!, goldSet: Float!): Profile
     addInventory(profileId: ID!, item: String!): Profile
 
     changeRole(profileId: ID!, setRole: Boolean!): Profile
