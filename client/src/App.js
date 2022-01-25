@@ -7,8 +7,14 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
+import AuthService from "./utils/auth";
 
 // importing components
 import Footer from "./components/Footer";

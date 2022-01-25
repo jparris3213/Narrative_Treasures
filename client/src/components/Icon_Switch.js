@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 const category_paths = [
-    "/icons/swords.png",
-    "/icons/armor.png",
-    "/icons/backpack.png",
-    "/icons/construction.png",
-    "/icons/construction.png"
+  "/icons/swords.png",
+  "/icons/armor.png",
+  "/icons/backpack.png",
+  "/icons/construction.png",
+  "/icons/construction.png",
 ];
 
 function IconSwitch(props) {
@@ -78,7 +78,6 @@ function IconSwitch(props) {
           />
         </div>
       )}
-
     </div>
   );
 }

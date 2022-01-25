@@ -11,28 +11,27 @@ const Navigation = () => {
 
   const { profileId } = useParams();
 
-  
-  const {loading, data} = useQuery(
-    profileId ? QUERY_GET_USER : QUERY_ME,
-    {
-      variables: { profileId: profileId},
-    }
-  )
+  const { loading, data } = useQuery(profileId ? QUERY_GET_USER : QUERY_ME, {
+    variables: { profileId: profileId },
+  });
 
   const profile = data?.me || data?.profile || {};
 
-  if( Auth.loggedIn() && Auth.getProfile().data._id === profileId ) {
-    return < Navigate to = "/me" />;
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
+  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+    return <Navigate to="/me" />;
   }
 
-  if( loading ) {
-    return(
-      <div>Loading...</div>
-    );
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
-  if( !profile?.name) {
-    return(
+  if (!profile?.name) {
+    return (
       <header className="bd-header py-3 d-flex align-items-stretch">
         <div className="container-fluid d-flex justify-content-center">
           <nav
@@ -62,10 +61,13 @@ const Navigation = () => {
                       Signup
                     </Link>
                   </li>
+                  <li className="nav-item"></li>
                   <li className="nav-item">
-                  </li>
-                  <li className="nav-item">
-
+                    <Link
+                      className="nav-link"
+                      activeclassname="is-active"
+                      to="/"
+                    >
                       <img
                         className="logo"
                         src="/icons/dragon-png-20.png"
@@ -73,28 +75,26 @@ const Navigation = () => {
                         width="40"
                         height="40"
                       />
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <Link
                       className="nav-link"
                       activeclassname="is-active"
-                      to="/home"
+                      to="/login"
                     >
                       Sign In
                     </Link>
-                  
                   </li>
-                  <li className="nav-item">
-                  </li>
+                  <li className="nav-item"></li>
                 </ul>
               </div>
             </div>
           </nav>
         </div>
       </header>
-    )
+    );
   }
-
 
   return (
     <header className="bd-header py-3 d-flex align-items-stretch">
@@ -118,13 +118,13 @@ const Navigation = () => {
             <div className="collapse navbar-collapse" id="navbarsExample03">
               <ul className="navbar-nav me-auto mb-2 mb-sm-0">
                 <li className="nav-item">
-                  <Link
+                  <p
                     className="nav-link"
                     activeclassname="is-active"
-                    to="/signup"
+                    onClick={logout}
                   >
-                    Signup
-                  </Link>
+                    LogOut
+                  </p>
                 </li>
                 <li className="nav-item">
                   <Link

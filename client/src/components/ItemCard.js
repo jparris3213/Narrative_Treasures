@@ -6,14 +6,13 @@ import { QUERY_ME } from "../utils/queries";
 import AuthService from "../utils/auth";
 
 function Card(props) {
-  const { item, inflationValue } = props;
+  const { item, inflationValue, changeGold, userGold } = props;
   const discStyle = { fontSize: "8px" };
 
   const [isOpen, setIsOpen] = useState(false);
 
   const [addInventory] = useMutation(ADD_INVENTORY);
   const [updateGold] = useMutation(CHANGE_GOLD);
-  const userGold = useQuery(QUERY_ME).data.me.gold;
 
   function flipCard(event) {
     setIsOpen(!isOpen);
@@ -81,6 +80,7 @@ function Card(props) {
             goldSet: userGold - finalCost,
           },
         });
+        changeGold(userGold - finalCost);
         alert(`You just bought a ${name}`);
       } catch (e) {
         console.error(e);
