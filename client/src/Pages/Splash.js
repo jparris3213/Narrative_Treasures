@@ -13,16 +13,22 @@ const Splash = () => {
         />
       </div>
       <div className="container-fluid d-flex justify-content-center">
-        <p className="splash-text">New adventurer?</p>
-        <p className="splash-text">Been here before?</p>
-      </div>
-      <div className="container-fluid d-flex justify-content-center">
-        <Link className="btn btn-lg btn-2 text-light" to="/signup">
-          Sign up
-        </Link>
-        <Link className="btn btn-lg btn-2 text-light" to="/login">
-          Log in
-        </Link>
+        <div className="card splash-text text-center">
+          <div className="card-body">
+            <h5 className="card-title text-light">New adventurer?</h5>
+            <Link className="btn btn-lg btn-2 text-light" to="/signup">
+              Sign up
+            </Link>
+          </div>
+        </div>
+        <div className="card splash-text text-center">
+          <div className="card-body">
+            <h5 className="card-title text-light">Not your first journey?</h5>
+            <Link className="btn btn-lg btn-2 text-light" to="/login">
+              Log in
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
