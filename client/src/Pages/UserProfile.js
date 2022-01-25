@@ -92,22 +92,25 @@ const UserProfile = () => {
                     <th scope="col">Item</th>
                     <th scope="col">Qty</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Dice</th>
+                    <th scope="col">Equipment Category</th>
                     <th scope="col">Cost</th>
-                    <th scope="col">Market Price</th>
-                    <th scope="col">Profit/Loss</th>
+                    <th scope="col">Dice</th>
+                    <th scope="col">Weapon Range</th>
+                    <th scope="col">Properties</th>
                   </tr>
                 </thead>
                 <tbody>
                   {" "}
-                  <b>
-                    {profile.inventory.length
-                      ? profile.inventory.map((item) => {
-                          return <p key={item.index}>{item}</p>; //for testing does work!
-                          //return <Item equipment={item} key={item.index} />;
-                        })
-                      : "ehh no inventory!"}
-                  </b>
+                  {profile.inventory.length
+                    ? profile.inventory.map((item) => {
+                        //return <p key={item.index}>{item}</p>; //for testing does work!
+                        const equipment = JSON.parse(item);
+                        console.log(equipment);
+                        return (
+                          <Item equipment={equipment} key={equipment.index} />
+                        );
+                      })
+                    : "ehh no inventory!"}
                 </tbody>
                 {/* <tbody>
                   {equipments.length &&
