@@ -1,6 +1,7 @@
 const Profile = require("./Profile");
-const Item = require("./Item");
-const DMStore = require("./DMStore");
+const Character = require("./Character");
+const Games = require("./Games");
+const Store = require("./Store");
 
 // export
-module.exports = { Profile, Item, DMStore };
+module.exports = { Profile, Character, Games, Store };

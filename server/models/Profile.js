@@ -1,6 +1,18 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const Game = {
+  index: { type: String },
+  name: { type: String },
+  character: { type: String },
+};
+
+const Character = {
+  index: { type: String },
+  name: { type: String },
+  gold: { type: Number },
+};
+
 const profileSchema = new Schema({
   name: {
     type: String,
@@ -19,31 +31,8 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  //if true then DM role is active
-  dungeonMaster: {
-    type: Boolean,
-    required: false,
-    unique: false,
-    defualt: false,
-  },
-  inventory: [
-    {
-      type: String,
-      trim: true,
-    },
-  ],
-  gold: {
-    type: Number,
-    required: true,
-    default: 125,
-  },
-  //used for saving a personal shop with filters for DMs only
-  savedFilters: [
-    {
-      type: String,
-      required: false,
-    },
-  ],
+  characters: [Character],
+  games: [Game],
 });
 
 // set up pre-save middleware to create password

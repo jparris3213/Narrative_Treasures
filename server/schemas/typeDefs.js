@@ -6,32 +6,29 @@ const typeDefs = gql`
     name: String!
     email: String!
     password: String!
-    dungeonMaster: Boolean!
-    inventory: [String]
-    gold: Float!
-    savedFilters: [String]
+    characters: [Character]
+    games: [Games]
   }
 
-  type Item {
+  type Store {
     _id: ID!
     name: String!
-    cost: Int!
-    equipmentType: String!
-    description: String
+    sort: String!
   }
 
-  type DMStore {
+  type Character {
     _id: ID!
     name: String!
-    playerList: [String]
-    goldMin: Int
-    goldMax: Int
-    adventureGearFilter: Boolean
-    toolsFilter: Boolean
-    mountsFilter: Boolean
-    armorFilter: Boolean
-    weaponFilter: Boolean
-    inflationVariable: Int
+    gold: Int!
+    items: [String]
+  }
+
+  type Games {
+    _id: ID!
+    name: String!
+    dm: Profile!
+    players: [Profile]
+    stores: [Store]
   }
 
   type Auth {
@@ -43,9 +40,6 @@ const typeDefs = gql`
     profiles: [Profile]!
     profile(profileId: ID!): Profile
     me: Profile
-    items: [Item]!
-    item(itemId: ID!): Item
-    storeFilter(storeId: ID!): DMStore
   }
 
   type Mutation {
@@ -66,26 +60,6 @@ const typeDefs = gql`
 
     removeItem(item: String!): Profile
     removeProfile: Profile
-
-    addItem(
-      name: String!
-      cost: Int!
-      equipmentType: String!
-      description: String!
-    ): Item
-
-    addFilter(
-      name: String!
-      playerList: [String]
-      goldMin: Int
-      goldMax: Int
-      adventureGearFilter: Boolean
-      toolsFilter: Boolean
-      mountsFilter: Boolean
-      armorFilter: Boolean
-      weaponFilter: Boolean
-      inflationVariable: Int
-    ): DMStore
 
     addFilterToUser(profileId: ID!, filterId: ID!): Profile
   }
