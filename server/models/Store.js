@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const storeSchema = new Schema({
+const storesSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -11,8 +11,12 @@ const storeSchema = new Schema({
     required: true,
     trim: true,
   },
+  display: {
+    type: Boolean,
+    required: true,
+  },
 });
 
-const Store = model("Store", storeSchema);
+const Stores = model("Stores", storesSchema);
 
-module.exports = Store;
+module.exports = Stores;

@@ -19,7 +19,7 @@ const typeDefs = gql`
   type Character {
     _id: ID!
     name: String!
-    gold: Int!
+    gold: Float!
     items: [String]
   }
 

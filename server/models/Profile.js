@@ -1,17 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-
-const Game = {
-  index: { type: String },
-  name: { type: String },
-  character: { type: String },
-};
-
-const Character = {
-  index: { type: String },
-  name: { type: String },
-  gold: { type: Number },
-};
+const Character = require("./Character");
+const Games = require("./Games");
 
 const profileSchema = new Schema({
   name: {
@@ -31,8 +21,18 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  characters: [Character],
-  games: [Game],
+  characters: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Character",
+    },
+  ],
+  games: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Games",
+    },
+  ],
 });
 
 // set up pre-save middleware to create password
