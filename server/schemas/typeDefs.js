@@ -14,6 +14,7 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     sort: String!
+    display: Boolean!
   }
 
   type Character {
@@ -26,6 +27,7 @@ const typeDefs = gql`
   type Games {
     _id: ID!
     name: String!
+    pasword: String!
     dm: Profile!
     players: [Profile]
     stores: [Store]
@@ -40,28 +42,17 @@ const typeDefs = gql`
     profiles: [Profile]!
     profile(profileId: ID!): Profile
     me: Profile
+    games: [Games]!
   }
 
   type Mutation {
-    addProfile(
-      name: String!
-      email: String!
-      password: String!
-      dungeonMaster: Boolean!
-      gold: Float!
-    ): Auth
-
+    addProfile(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-
-    changeGold(profileId: ID!, goldSet: Float!): Profile
-    addInventory(profileId: ID!, item: String!): Profile
-
-    changeRole(profileId: ID!, setRole: Boolean!): Profile
-
-    removeItem(item: String!): Profile
     removeProfile: Profile
 
-    addFilterToUser(profileId: ID!, filterId: ID!): Profile
+    addGame(name: String!, password: String!): Games
+
+    addStore(name: String!, sort: String!, display: Boolean!): Store
   }
 `;
 

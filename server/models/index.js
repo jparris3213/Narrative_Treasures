@@ -1,7 +1,7 @@
 const Profile = require("./Profile");
 const Character = require("./Character");
 const Games = require("./Games");
-const Store = require("./Store");
+const Stores = require("./Stores");
 
 // export
-module.exports = { Profile, Character, Games, Store };
+module.exports = { Profile, Character, Games, Stores };

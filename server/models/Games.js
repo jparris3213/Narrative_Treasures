@@ -1,15 +1,4 @@
 const { Schema, model } = require("mongoose");
-const Stores = require("./Store");
-
-const Dm = {
-  index: { type: String },
-  name: { type: String },
-};
-
-const Players = {
-  index: { type: String },
-  name: { type: String },
-};
 
 const gameSchema = new Schema({
   name: {
@@ -22,8 +11,18 @@ const gameSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  dm: { Dm },
-  players: [Players],
+  dm: {
+    type: Schema.Types.ObjectId,
+    ref: "Profile",
+    required: true,
+  },
+
+  players: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
+    },
+  ],
   stores: [
     {
       type: Schema.Types.ObjectId,

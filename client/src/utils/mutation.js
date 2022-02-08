@@ -15,20 +15,8 @@ export const LOGIN = gql`
 
 //this adds a user to our database
 export const ADD_PROFILE = gql`
-  mutation addProfile(
-    $name: String!
-    $email: String!
-    $password: String!
-    $dungeonMaster: Boolean!
-    $gold: Float!
-  ) {
-    addProfile(
-      name: $name
-      email: $email
-      password: $password
-      dungeonMaster: $dungeonMaster
-      gold: $gold
-    ) {
+  mutation addProfile($name: String!, $email: String!, $password: String!) {
+    addProfile(name: $name, email: $email, password: $password) {
       token
       profile {
         _id

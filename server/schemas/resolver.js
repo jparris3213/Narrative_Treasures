@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { Profile } = require("../models");
+const { Profile, Games, Stores } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolver = {
@@ -16,100 +16,66 @@ const resolver = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    games: async () => {
+      return Games.find();
+    },
   },
 
-  // Mutation: {
-  //   addProfile: async (
-  //     parent,
-  //     { name, email, password, dungeonMaster, gold }
-  //   ) => {
-  //     const profile = await Profile.create({
-  //       name,
-  //       email,
-  //       password,
-  //       dungeonMaster,
-  //       gold,
-  //     });
-  //     const token = signToken(profile);
+  Mutation: {
+    // User Mutation
+    addProfile: async (parent, { name, email, password }) => {
+      const profile = await Profile.create({
+        name,
+        email,
+        password,
+      });
+      const token = signToken(profile);
 
-  //     return { token, profile };
-  //   },
-  //   login: async (parent, { email, password }) => {
-  //     const profile = await Profile.findOne({ email });
+      return { token, profile };
+    },
+    login: async (parent, { email, password }) => {
+      const profile = await Profile.findOne({ email });
 
-  //     if (!profile) {
-  //       throw new AuthenticationError("No profile with that name or email!");
-  //     }
-  //     const correctPw = await profile.isCorrectPassword(password);
+      if (!profile) {
+        throw new AuthenticationError("No profile with that name or email!");
+      }
+      const correctPw = await profile.isCorrectPassword(password);
 
-  //     if (!correctPw) {
-  //       throw new AuthenticationError("Incorrect Password!");
-  //     }
-  //     const token = signToken(profile);
-  //     return { token, profile };
-  //   },
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect Password!");
+      }
+      const token = signToken(profile);
+      return { token, profile };
+    },
 
-  //   changeGold: async (parent, { profileId, goldSet }, context) => {
-  //     if (context.user) {
-  //       return Profile.findOneAndUpdate(
-  //         { _id: profileId },
-  //         { $set: { gold: goldSet } },
-  //         {
-  //           new: true,
-  //           runValidators: true,
-  //         }
-  //       );
-  //     }
-  //     throw new AuthenticationError(
-  //       "You have to be logged in to make changes!"
-  //     );
-  //   },
+    removeProfile: async (parent, args, context) => {
+      if (context.user) {
+        return Profile.findOneAndDelete({ _id: context.user._id });
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
 
-  //   addInventory: async (parent, { profileId, item }, context) => {
-  //     if (context.user) {
-  //       return Profile.findOneAndUpdate(
-  //         { _id: profileId },
-  //         { $addToSet: { inventory: item } },
-  //         {
-  //           new: true,
-  //           runValidators: true,
-  //         }
-  //       );
-  //     }
-  //     throw new AuthenticationError(
-  //       "You have to be logged in to make changes!"
-  //     );
-  //   },
+    // Game Mutations
+    addGame: async (parent, { name, password }, context) => {
+      if (context.user) {
+        const game = await Games.create({
+          name,
+          password,
+          dm: context.user._id,
+        });
+      }
+    },
 
-  //   removeProfile: async (parent, args, context) => {
-  //     if (context.user) {
-  //       return Profile.findOneAndDelete({ _id: context.user._id });
-  //     }
-  //     throw new AuthenticationError("You need to be logged in!");
-  //   },
-
-  //   removeItem: async (parent, { item }, context) => {
-  //     if (context.user) {
-  //       return Profile.findOneAndUpdate(
-  //         { _id: context.user.id },
-  //         { $pull: { inventory: item } },
-  //         { new: true }
-  //       );
-  //     }
-  //     throw new AuthenticationError("You must be logged in!");
-  //   },
-
-  //   addItem: async (
-  //     parent,
-  //     { name, cost, equipmentType, description },
-  //     context
-  //   ) => {
-  //     if (context.user) {
-  //       return Item.create({ name, cost, equipmentType, description });
-  //     }
-  //     throw new AuthenticationError("You must be logged in!");
-  //   },
-  // },
+    // Store Mutations
+    addStore: async (parent, { name, sort, display }) => {
+      const store = await Stores.create({
+        name,
+        sort,
+        display,
+      });
+      return store;
+    },
+  },
 };
 
 module.exports = resolver;
