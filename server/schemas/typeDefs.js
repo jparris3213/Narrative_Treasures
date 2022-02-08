@@ -10,7 +10,7 @@ const typeDefs = gql`
     games: [Games]
   }
 
-  type Store {
+  type Stores {
     _id: ID!
     name: String!
     sort: String!
@@ -28,9 +28,9 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     pasword: String!
-    dm: Profile!
+    dm: Profile
     players: [Profile]
-    stores: [Store]
+    stores: [Stores]
   }
 
   type Auth {
@@ -43,6 +43,7 @@ const typeDefs = gql`
     profile(profileId: ID!): Profile
     me: Profile
     games: [Games]!
+    stores: [Stores]!
   }
 
   type Mutation {
@@ -52,7 +53,7 @@ const typeDefs = gql`
 
     addGame(name: String!, password: String!): Games
 
-    addStore(name: String!, sort: String!, display: Boolean!): Store
+    addStore(name: String!, sort: String!, display: Boolean!): Stores
   }
 `;
 

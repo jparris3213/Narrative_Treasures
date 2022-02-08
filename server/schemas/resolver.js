@@ -61,9 +61,10 @@ const resolver = {
         const game = await Games.create({
           name,
           password,
-          dm: context.user._id,
         });
+        return game;
       }
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     // Store Mutations

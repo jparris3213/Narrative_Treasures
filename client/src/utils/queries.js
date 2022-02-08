@@ -7,9 +7,6 @@ export const QUERY_PROFILES = gql`
       _id
       name
       email
-      dungeonMaster
-      inventory
-      gold
     }
   }
 `;
@@ -21,10 +18,6 @@ export const QUERY_GET_USER = gql`
       _id
       name
       email
-      dungeonMaster
-      inventory
-      gold
-      savedFilters
     }
   }
 `;
@@ -36,10 +29,6 @@ export const QUERY_ME = gql`
       _id
       name
       email
-      dungeonMaster
-      inventory
-      gold
-      savedFilters
     }
   }
 `;
