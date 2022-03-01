@@ -1,5 +1,9 @@
-const { AuthenticationError } = require("apollo-server-express");
+const {
+  AuthenticationError,
+  UserInputError,
+} = require("apollo-server-express");
 const { Profile, Games, Stores } = require("../models");
+const { findById } = require("../models/Games");
 const { signToken } = require("../utils/auth");
 
 const resolver = {
@@ -68,10 +72,16 @@ const resolver = {
           password,
           dm,
         });
+        const user = await Profile.findById(dm);
+        console.log(user);
+        await Profile.findByIdAndUpdate(dm, {
+          games: [...user.games, game._id],
+        });
         return game;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    addCharacter: async (parent, { name, gold, game, profile }, context) => {},
 
     // Store Mutations
     addStore: async (parent, { name, sort, display }) => {
