@@ -3,7 +3,6 @@ const {
   UserInputError,
 } = require("apollo-server-express");
 const { Profile, Games, Stores, Character } = require("../models");
-const { findById } = require("../models/Games");
 const { signToken } = require("../utils/auth");
 
 const resolver = {
