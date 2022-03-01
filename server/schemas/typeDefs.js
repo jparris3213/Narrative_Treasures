@@ -60,7 +60,12 @@ const typeDefs = gql`
       profileId: ID!
     ): Character
 
-    addStore(name: String!, sort: String!, display: Boolean!): Stores
+    addStore(
+      name: String!
+      sort: String!
+      display: Boolean!
+      gameId: ID!
+    ): Stores
   }
 `;
 

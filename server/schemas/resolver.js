@@ -35,6 +35,9 @@ const resolver = {
       });
       return games;
     },
+    stores: async () => {
+      return await Stores.find();
+    },
   },
 
   Mutation: {
@@ -89,6 +92,7 @@ const resolver = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    //TODO:Change profileId over to context
     addCharacter: async (
       parent,
       { name, gold, gameId, profileId },
@@ -113,11 +117,16 @@ const resolver = {
     },
 
     // Store Mutations
-    addStore: async (parent, { name, sort, display }) => {
+    addStore: async (parent, { name, sort, display, gameId }) => {
       const store = await Stores.create({
         name,
         sort,
         display,
+      });
+      //update game
+      const game = await Games.findById(gameId);
+      await Games.findByIdAndUpdate(gameId, {
+        stores: [...game.stores, store._id],
       });
       return store;
     },
