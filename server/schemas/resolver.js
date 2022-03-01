@@ -17,7 +17,11 @@ const resolver = {
       throw new AuthenticationError("You need to be logged in!");
     },
     games: async () => {
-      return Games.find();
+      const games = await Games.find().populate({
+        path: "dm",
+        populate: "profiles",
+      });
+      return games;
     },
   },
 
@@ -56,11 +60,13 @@ const resolver = {
     },
 
     // Game Mutations
-    addGame: async (parent, { name, password }, context) => {
-      if (context.user) {
+    //TODO:change dm back over to context
+    addGame: async (parent, { name, password, dm }, context) => {
+      if (true) {
         const game = await Games.create({
           name,
           password,
+          dm,
         });
         return game;
       }

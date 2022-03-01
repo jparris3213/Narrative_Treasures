@@ -27,8 +27,8 @@ const typeDefs = gql`
   type Games {
     _id: ID!
     name: String!
-    pasword: String!
-    dm: Profile
+    password: String!
+    dm: Profile!
     players: [Profile]
     stores: [Stores]
   }
@@ -51,7 +51,14 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     removeProfile: Profile
 
-    addGame(name: String!, password: String!): Games
+    addGame(name: String!, password: String!, dm: ID!): Games
+
+    addCharacter(
+      name: String!
+      gold: Float!
+      game: ID!
+      profile: ID!
+    ): Character
 
     addStore(name: String!, sort: String!, display: Boolean!): Stores
   }
