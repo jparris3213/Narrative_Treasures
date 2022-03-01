@@ -12,7 +12,15 @@ const resolver = {
       return Profile.find();
     },
     profile: async (parent, { profileId }) => {
-      return Profile.findOne({ _id: profileId });
+      return Profile.findOne({ _id: profileId })
+        .populate({
+          path: "games",
+          populate: "games",
+        })
+        .populate({
+          path: "characters",
+          populate: "character",
+        });
     },
     me: async (parent, args, context) => {
       if (context.user) {
