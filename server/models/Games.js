@@ -29,6 +29,12 @@ const gameSchema = new Schema({
       ref: "Stores",
     },
   ],
+  characters: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Character",
+    },
+  ],
 });
 
 const Games = model("Games", gameSchema);

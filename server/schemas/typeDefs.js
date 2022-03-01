@@ -31,6 +31,7 @@ const typeDefs = gql`
     dm: Profile!
     players: [Profile]
     stores: [Stores]
+    characters: [Character]
   }
 
   type Auth {

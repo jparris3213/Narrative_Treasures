@@ -77,13 +77,28 @@ const resolver = {
     //TODO:change dm back over to context
     addGame: async (parent, { name, password, dm }, context) => {
       if (true) {
+        //check for duplicate game names
+        const user = await Profile.findById(dm).populate({
+          path: "games",
+          populate: "games",
+        });
+        const gameNames = user.games.map((game) => {
+          return game.name;
+        });
+        if (gameNames.includes(name)) {
+          throw new AuthenticationError(
+            "You can't have more then one game with the same name."
+          );
+        }
+
+        //create new game
         const game = await Games.create({
           name,
           password,
           dm,
         });
+
         //update profile of dm
-        const user = await Profile.findById(dm);
         await Profile.findByIdAndUpdate(dm, {
           games: [...user.games, game._id],
         });
@@ -97,17 +112,46 @@ const resolver = {
       { name, gold, gameId, profileId },
       context
     ) => {
+      //check for duplicate names in profile
+      const user = await Profile.findById(profileId).populate({
+        path: "characters",
+        populate: "character",
+      });
+      const characterNamesProfile = user.characters.map((character) => {
+        return character.name;
+      });
+      if (characterNamesProfile.includes(name)) {
+        throw new AuthenticationError(
+          "You can't have more then one character with the same name in a game."
+        );
+      }
+      //check for no duplicate names in a game
+      const game = await Games.findById(gameId).populate({
+        path: "characters",
+        populate: "character",
+      });
+      const characterNamesGame = game.characters.map((character) => {
+        return character.name;
+      });
+      if (characterNamesGame.includes(name)) {
+        throw new AuthenticationError(
+          "You can't have more then one character with the same name in your profile."
+        );
+      }
+
+      //creates new character
       const character = await Character.create({
         name,
         gold,
       });
+
       //update game
-      const game = await Games.findById(gameId);
       await Games.findByIdAndUpdate(gameId, {
         players: [...game.players, character._id],
+        characters: [...game.characters, character._id],
       });
+
       //update profile of player
-      const user = await Profile.findById(profileId);
       await Profile.findByIdAndUpdate(profileId, {
         characters: [...user.characters, character._id],
         games: [...user.games, game._id],
@@ -117,13 +161,28 @@ const resolver = {
 
     // Store Mutations
     addStore: async (parent, { name, sort, display, gameId }) => {
+      //check for duplicate names in game
+      const game = await Games.findById(gameId).populate({
+        path: "stores",
+        populate: "stores",
+      });
+      const storeNames = game.stores.map((store) => {
+        return store.name;
+      });
+      if (storeNames.includes(name)) {
+        throw new AuthenticationError(
+          "You can't have more then one store with the same name."
+        );
+      }
+
+      //creates store
       const store = await Stores.create({
         name,
         sort,
         display,
       });
+
       //update game
-      const game = await Games.findById(gameId);
       await Games.findByIdAndUpdate(gameId, {
         stores: [...game.stores, store._id],
       });
