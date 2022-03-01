@@ -56,8 +56,8 @@ const typeDefs = gql`
     addCharacter(
       name: String!
       gold: Float!
-      game: ID!
-      profile: ID!
+      gameId: ID!
+      profileId: ID!
     ): Character
 
     addStore(name: String!, sort: String!, display: Boolean!): Stores
