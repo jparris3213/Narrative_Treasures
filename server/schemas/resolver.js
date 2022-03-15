@@ -23,7 +23,10 @@ const resolver = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return Profile.findOne({ _id: context.user._id });
+        return Profile.findOne({ _id: context.user._id }).populate({
+          path: "games",
+          populate: "dm",
+        });
       }
       throw new AuthenticationError("You need to be logged in!");
     },

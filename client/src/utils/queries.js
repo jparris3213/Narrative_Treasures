@@ -18,6 +18,15 @@ export const QUERY_GET_USER = gql`
       _id
       name
       email
+      password
+      games {
+        _id
+        name
+      }
+      characters {
+        _id
+        gold
+      }
     }
   }
 `;
@@ -29,6 +38,14 @@ export const QUERY_ME = gql`
       _id
       name
       email
+      password
+      games {
+        _id
+        name
+        dm {
+          _id
+        }
+      }
     }
   }
 `;
